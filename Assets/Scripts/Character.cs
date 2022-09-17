@@ -10,12 +10,13 @@ public class Character
     public RepEffect Effect { get { return this.effect; } }
     private int index = 0;
     private float patience;
-
+    
     public Character(string[] texts,RepEffect effect,int patience)
     {
         this.texts = texts;
         this.effect = effect;
         this.patience = patience;
+        Debug.Log("");
     }
     public string getText()
     {
