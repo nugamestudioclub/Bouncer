@@ -19,6 +19,12 @@ public class CharacterSelector : MonoBehaviour
         int random = Random.Range(0, characters.Length);
         return characters[random];
     }
+
+    //Dummy class
+    public bool isLast()
+    {
+        return false;
+    }
     
     // Update is called once per frame
     void Update()
