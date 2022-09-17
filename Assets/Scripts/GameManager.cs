@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     //MajorProblem(), MinorProblem(), MajorGood(), MinorGood() and load() which can be left empty.
     //Each function when called will apply changes to Rep.
     //Also note: ONCE YOU CREATE THIS CLASS delete the DUMMY CLASS of ReputationTracker in the bottom of this script.
-    
     private RepuataionTracker tracker;
+
 
     private string activeText = "";
 
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         Character character = selector.selectChar();
         activeText = character.getText();
     }
-    
+
     //Iterates to the next night.
     void IterateNight()
     {
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
                 
                 break;
         }
-       
+
     }
     //Will be called when the player clicks the "Bounce" button.
     void Bounce(Character character)
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
             case 3:
                 tracker.MajorGood();
                 break;
-        
+
         }
     }
 
