@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RepuataionTracker : MonoBehaviour
+public class ReputationTracker : MonoBehaviour
 {
 
     private int score;
