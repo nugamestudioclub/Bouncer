@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         //Loading/serializing data.
-        Character character = selector.selectChar();
+        Character character = selector.GetFirstCharacter();
         activeText = character.getText();
     }
 
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
         // checks for the last character or we reset the night instead
         else
         {
-            this.IsLastCharacer();
+            this.GetNextCharacterOrReset();
         }
     }
 
@@ -104,16 +104,16 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void IsLastCharacer()
+    void GetNextCharacterOrReset()
     {
         // 
         if (selector.isLast()) {
-            this.activeCharacter = selector.selectChar();
+            this.ResetNight();
         }
 
         // 
         else {
-            this.ResetNight();
+            this.activeCharacter = selector.GetNextChararacter();
         }
     }
     
