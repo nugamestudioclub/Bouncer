@@ -25,10 +25,21 @@ public class Character
     //0 is MAJOR PROBLEM (-20), 1 is MINOR PROBLEM(-5), 2 is Minor GOOD(+5), 3 is Major Good(+20)
     public int Admit()
     {
+        switch (this.effect)
+        {
+            case RepEffect.MajorGood:
+                return 3;
+            case RepEffect.MinorGood:
+                return 2;
+            case RepEffect.MinorProblem:
+                return 1;
+            case RepEffect.MajorProblem:
+                return 0;
+        }
         return 0;
     }
     public int Bounce()
     {
-        return 0;
+        return 3 - Admit();
     }
 }

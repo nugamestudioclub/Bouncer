@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    private Character activeCharacter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,9 +85,44 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void CheckRepToLow()
+    {
+
+    }
+
+    void IsLastCharacer()
+    {
+        //if is false
+        this.activeCharacter = selector.selectChar();
+        //if is true
+        this.ResetNight();
+    }
+    
+    /// <summary>
+    /// if is END GAME
+    /// if not new night
+    /// </summary>
+    void ResetNight()
+    {
+
+    }
     
 
+    void IterateChoice()
+    {
 
+    }
+
+    void Stormout()
+    {
+
+    }
+
+    bool IsOutOfTime()
+    {
+        //reference global timer 
+        return false;
+    }
 
     // Update is called once per frame
     void Update()
