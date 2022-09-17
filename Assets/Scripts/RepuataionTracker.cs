@@ -31,5 +31,5 @@ public class RepuataionTracker : MonoBehaviour
         this.score += 20;
     }
 
-    public void load();
+    public void load() { };
 }
