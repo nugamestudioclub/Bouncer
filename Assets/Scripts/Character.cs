@@ -43,4 +43,9 @@ public class Character
     {
         return 3 - Admit();
     }
+
+    public float GetPatience()
+    {
+        return patience;
+    }
 }

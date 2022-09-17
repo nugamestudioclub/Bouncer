@@ -8,8 +8,12 @@ public class GameManager : MonoBehaviour
     private int nightCount = 0;
     public int NightCount { get { return nightCount; } }
 
-    private CharacterSelector selector;
+    private float gameTime = 0;
+    public float GameTime { get { return gameTime; } } 
 
+    private CharacterSelector selector;
+    private float characterTime = 0; // Tracks the time spent by 
+   
     //TODO: Create ReputationTracker.cs script and implement the following functions:
     //MajorProblem(), MinorProblem(), MajorGood(), MinorGood() and load() which can be left empty.
     //Each function when called will apply changes to Rep.
@@ -26,13 +30,13 @@ public class GameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-       
+    { 
 
         instance = this;
         //Loading/serializing data.
         Character character = selector.selectChar();
         activeText = character.getText();
+
     }
 
     //Iterates to the next night.
@@ -57,8 +61,7 @@ public class GameManager : MonoBehaviour
                 tracker.MinorGood();
                 break;
             case 3:
-                tracker.MajorGood();
-                
+                tracker.MajorGood();                
                 break;
         }
 
@@ -108,6 +111,7 @@ public class GameManager : MonoBehaviour
     {
         // 
         if (selector.isLast()) {
+
             this.activeCharacter = selector.selectChar();
         }
 
@@ -124,6 +128,7 @@ public class GameManager : MonoBehaviour
     void ResetNight()
     {
         this.IterateNight();
+        ResetGameTime();
     }
     
 
@@ -131,21 +136,51 @@ public class GameManager : MonoBehaviour
     {
 
     }
-
+    
     void Stormout()
     {
+                      
+    }
 
+    // Reset time when night ends
+    void ResetGameTime()
+    {
+        gameTime = 0;
+    }
+
+    // Start the timer for a new character
+    void StartCharacterTime()
+    {
+        characterTime = gameTime;
+    }
+
+    // Get the time spent by a character
+    float GetCharacterTime()
+    {
+        return gameTime - characterTime;
+    }
+
+    // Get the time remaining before patience runs out
+    float CharacterPatienceRemaining(Character character)
+    {
+        return character.GetPatience() - GetCharacterTime(); 
+    }
+
+    // Reset time for the next character in queue
+    void ResetCharacterTime()
+    {
+        characterTime = 0;
     }
 
     bool IsOutOfTime()
     {
-        //reference global timer 
+        //reference global timer    
         return false;
     }
 
     // Update is called once per frame
     void Update()
     {
-     
+        gameTime += Time.deltaTime;        
     }
 }
