@@ -6,11 +6,11 @@ using UnityEngine;
 public class CharacterDialogue
 {
     public string Name { get; private set; }
-    public List<DialougeNode> Nodes { get; private set; }
+    public List<DialogueNode> Nodes { get; private set; }
 
-    public DialougeNode GetDialogueNode(Label label)
+    public DialogueNode GetDialogueNode(Label label)
     {
-        foreach(DialougeNode node in Nodes)
+        foreach(DialogueNode node in Nodes)
         {
             if(node.Label.Equals(label)) {
                 return node;
@@ -19,7 +19,7 @@ public class CharacterDialogue
         return null;
     }
 
-    public List<DialougeNode> GetNodes()
+    public List<DialogueNode> GetNodes()
     {
         return Nodes;
     }

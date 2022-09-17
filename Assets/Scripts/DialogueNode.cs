@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class DialougeNode
+public class DialogueNode
 {
 
     public Label Label{ get; private set; }

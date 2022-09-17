@@ -6,7 +6,7 @@ public class DialogueHandler : MonoBehaviour
 {
     CharacterDialogueReader dialogueReader;
     CharacterDialogue dialogueTree;
-    DialougeNode currentNode;
+    DialogueNode currentNode;
 
 
     // Start is called before the first frame update
@@ -21,7 +21,7 @@ public class DialogueHandler : MonoBehaviour
         SetCurrentNode(dialogueTree.GetDialogueNode(Label.Intro));
     }
 
-    void SetCurrentNode(DialougeNode node)
+    void SetCurrentNode(DialogueNode node)
     {
         currentNode = node;
     }
@@ -31,10 +31,10 @@ public class DialogueHandler : MonoBehaviour
         return currentNode.Text;
     }
 
-    public List<DialougeNode> getLinkedNodes()
+    public List<DialogueNode> getLinkedNodes()
     {
-        List<DialougeNode> toReturn = new List<DialougeNode>();
-        foreach(DialougeNode node in dialogueTree.GetNodes())
+        List<DialogueNode> toReturn = new List<DialogueNode>();
+        foreach(DialogueNode node in dialogueTree.GetNodes())
         {
             if(currentNode.Connections.Contains(node.Label))
             {
