@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class GameManager : MonoBehaviour
 {
     private int nightCount = 0;
     public int NightCount { get { return nightCount; } }
-
+    
+    public int NetWorth = 0; // Net worth of the bouncer
     private CharacterSelector selector;
 
     //TODO: Create ReputationTracker.cs script and implement the following functions:
     //MajorProblem(), MinorProblem(), MajorGood(), MinorGood() and load() which can be left empty.
     //Each function when called will apply changes to Rep.
     //Also note: ONCE YOU CREATE THIS CLASS delete the DUMMY CLASS of ReputationTracker in the bottom of this script.
-    
     private ReputationTracker tracker;
 
 
@@ -22,13 +21,9 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
-    private Character activeCharacter;
-
     // Start is called before the first frame update
     void Start()
     {
-       
-
         instance = this;
 
         //Loading/serializing data.
@@ -40,8 +35,22 @@ public class GameManager : MonoBehaviour
     //Iterates to the next night.
     void IterateNight()
     {
+
         this.nightCount++;
         //run conditions.
+        this.UpdateNetWorth(100 + Random.Range(tracker.score/4 , tracker.score/2)); // Updates the bouncers net worth at the end of the night
+    }
+   
+    void UpdateNetWorth(int Cash)
+    {
+
+        this.NetWorth += Cash;
+    }
+   
+    void AcceptBribe(int Bribe)
+    {
+
+        UpdateNetWorth(Bribe);
     }
 
     //Will be called when a player clicks the "Admit" button.
@@ -50,17 +59,16 @@ public class GameManager : MonoBehaviour
         switch (character.Admit())
         {
             case 0:
-                tracker.MajorProblem();
+                //TODO: Call tracker.MajorProblem() function.
                 break;
             case 1:
-                tracker.MinorProblem();
+                //TODO: Call tracker.MinorProblem() function.
                 break;
             case 2:
-                tracker.MinorGood();
+                //TODO: Call tracker.MinorGood() function.
                 break;
             case 3:
-                tracker.MajorGood();
-                
+                //TODO: Call tracker.MajorGood() function.
                 break;
         }
 
@@ -71,63 +79,60 @@ public class GameManager : MonoBehaviour
         switch (character.Bounce())
         {
             case 0:
-                tracker.MajorProblem();
+                //TODO: Call tracker.MajorProblem() function.
                 break;
             case 1:
-                tracker.MinorProblem();
+                //TODO: Call tracker.MinorProblem() function.
                 break;
             case 2:
-                tracker.MinorGood();
+                //TODO: Call tracker.MinorGood() function.
                 break;
             case 3:
-                tracker.MajorGood();
+                //TODO: Call tracker.MajorGood() function.
                 break;
 
         }
     }
 
-    void CheckRepTooLow()
-    {
-
-    }
-
-    void IsLastCharacer()
-    {
-        //if is false
-        this.activeCharacter = selector.selectChar();
-        //if is true
-        this.ResetNight();
-    }
-    
-    /// <summary>
-    /// if is END GAME
-    /// if not new night
-    /// </summary>
-    void ResetNight()
-    {
-
-    }
     
 
-    void IterateChoice()
-    {
 
-    }
-
-    void Stormout()
-    {
-
-    }
-
-    bool IsOutOfTime()
-    {
-        //reference global timer 
-        return false;
-    }
 
     // Update is called once per frame
     void Update()
     {
      
+        
+
+    }
+}
+
+
+//DUMMY CLASSES PLEASE IGNORE
+class CharacterSelector 
+{
+   public Character selectChar() { return new Character(); }
+}
+class Character
+{
+    public string getText() {
+        return "";
+    }
+    //0 is MAJOR PROBLEM (-20), 1 is MINOR PROBLEM(-5), 2 is Minor GOOD(+5), 3 is Major Good(+20)
+    public int Admit()
+    {
+        return 0;
+    }
+    public int Bounce()
+    {
+        return 0;
+    }
+}
+//REMOVE ONCE PROPER ReputationTracker class has been made.
+class ReputationTracker
+{
+    public void load()
+    {
+
     }
 }
