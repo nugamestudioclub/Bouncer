@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void CheckRepToLow()
+    void CheckRepTooLow()
     {
 
     }
