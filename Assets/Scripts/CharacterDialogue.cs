@@ -5,7 +5,22 @@ using UnityEngine;
 [System.Serializable]
 public class CharacterDialogue
 {
-    string name;
+    public string Name { get; private set; }
+    public List<DialougeNode> Nodes { get; private set; }
 
-    List<DialougeNode> nodes;
+    public DialougeNode GetDialogueNode(Label label)
+    {
+        foreach(DialougeNode node in Nodes)
+        {
+            if(node.Label.Equals(label)) {
+                return node;
+            }
+        }
+        return null;
+    }
+
+    public List<DialougeNode> GetNodes()
+    {
+        return Nodes;
+    }
 }

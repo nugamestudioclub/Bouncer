@@ -6,9 +6,9 @@ using UnityEngine;
 public class DialougeNode
 {
 
-    string label;
-    string text;
-    List<string> connections;
-    List<Effects> effects;
-    
+    public Label Label{ get; private set; }
+    public string Text { get; private set; }
+    public List<Label> Connections { get; private set; }
+    public List<Conditions> Conditions { get; private set; }
+    public List<Effects> Effects { get; private set; }
 }

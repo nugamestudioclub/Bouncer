@@ -8,7 +8,7 @@ public class CharacterDialogueReader : MonoBehaviour
     private string filepath;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         ReadCharacterDialogue();
     }
@@ -28,11 +28,14 @@ public class CharacterDialogueReader : MonoBehaviour
 
     }
 
-    CharacterDialogue GetCharacterDialogue(string name)
+    public CharacterDialogue GetCharacterDialogue(string name)
     {
         foreach(CharacterDialogue dialogue in list)
         {
-            // Do stuff
+            if (dialogue.Name.Equals(name))
+            {
+                return dialogue;
+            }
         }
         return null;
     }
