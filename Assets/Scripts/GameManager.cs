@@ -86,10 +86,13 @@ public class GameManager : MonoBehaviour
 
     void CheckRepTooLow()
     {
-        if (tracker.Rep < -100)
+        // If the reputation gets below a threshold, end game
+        if (tracker.Rep < tracker.EndThreshold)
         {
             this.EndGame();
         }
+
+        // checks for the last character or we reset the night instead
         else
         {
             this.IsLastCharacer();
@@ -103,9 +106,12 @@ public class GameManager : MonoBehaviour
 
     void IsLastCharacer()
     {
+        // 
         if (selector.isLast()) {
             this.activeCharacter = selector.selectChar();
         }
+
+        // 
         else {
             this.ResetNight();
         }
