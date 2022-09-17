@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class RepuataionTracker : MonoBehaviour
 {
+<<<<<<< Updated upstream
     public int Rep { get { return this.rep; } }
 
     private int rep;
 
+=======
+    public int Rep 
+    { 
+    get {return this.rep;
+    }
+    }
+    
+    private int rep;
+
+>>>>>>> Stashed changes
     // Reduces the rep of the player as a result of a major problem
     public void MajorProblem() 
     {
@@ -32,5 +43,8 @@ public class RepuataionTracker : MonoBehaviour
         this.rep += 20;
     }
 
+<<<<<<< Updated upstream
     
+=======
+>>>>>>> Stashed changes
 }

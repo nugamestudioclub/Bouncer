@@ -13,7 +13,12 @@ public class GameManager : MonoBehaviour
     //MajorProblem(), MinorProblem(), MajorGood(), MinorGood() and load() which can be left empty.
     //Each function when called will apply changes to Rep.
     //Also note: ONCE YOU CREATE THIS CLASS delete the DUMMY CLASS of ReputationTracker in the bottom of this script.
+<<<<<<< Updated upstream
     private RepuataionTracker tracker;
+=======
+    
+    private ReputaionTracker tracker;
+>>>>>>> Stashed changes
 
     private string activeText = "";
 
@@ -78,6 +83,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
+=======
+    void CheckRepTooLow()
+        if (ReputaionTracker.Rep < -100)
+        {
+           this.EndGame(); 
+        }
+        else{
+            this.IsLastCharacer();
+        }
+    }
+
+    void EndGame()
+    {
+
+    }
+
+    void IsLastCharacer()
+    {
+        if (selector.isLast())
+        this.activeCharacter = selector.selectChar();
+        //if is true
+        this.ResetNight();
+    }
+>>>>>>> Stashed changes
     
 
 
