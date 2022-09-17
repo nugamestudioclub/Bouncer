@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     //Each function when called will apply changes to Rep.
     //Also note: ONCE YOU CREATE THIS CLASS delete the DUMMY CLASS of ReputationTracker in the bottom of this script.
     
-    private RepuataionTracker tracker;
+    private ReputationTracker tracker;
 
     private string activeText = "";
 
