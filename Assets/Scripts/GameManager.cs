@@ -30,9 +30,7 @@ public class GameManager : MonoBehaviour
        
 
         instance = this;
-
         //Loading/serializing data.
-        tracker.load();
         Character character = selector.selectChar();
         activeText = character.getText();
     }
@@ -88,15 +86,29 @@ public class GameManager : MonoBehaviour
 
     void CheckRepTooLow()
     {
+        if (tracker.Rep < -100)
+        {
+            this.EndGame();
+        }
+        else
+        {
+            this.IsLastCharacer();
+        }
+    }
+
+    void EndGame()
+    {
 
     }
 
     void IsLastCharacer()
     {
-        //if is false
-        this.activeCharacter = selector.selectChar();
-        //if is true
-        this.ResetNight();
+        if (selector.isLast()) {
+            this.activeCharacter = selector.selectChar();
+        }
+        else {
+            this.ResetNight();
+        }
     }
     
     /// <summary>
@@ -105,7 +117,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void ResetNight()
     {
-
+        this.IterateNight();
     }
     
 

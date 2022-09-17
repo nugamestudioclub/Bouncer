@@ -4,32 +4,37 @@ using UnityEngine;
 
 public class ReputationTracker : MonoBehaviour
 {
+    public int Rep
+    {
+        get
+        {
+            return this.rep;
+        }
+    }
 
-    private int score;
+    private int rep;
 
-    // Reduces the score of the player as a result of a major problem
+    // Reduces the rep of the player as a result of a major problem
     public void MajorProblem() 
     {
-        this.score -= 20;
+        this.rep -= 20;
     }
 
-    // Reduces the score of the player as a result of a minor problem
+    // Reduces the rep of the player as a result of a minor problem
     public void MinorProblem()
     {
-        this.score -= 5;
+        this.rep -= 5;
     }
 
-    // Adds to the score of the player as a result of a minor merit
+    // Adds to the rep of the player as a result of a minor merit
     public void MinorGood()
     {
-        this.score += 5;
+        this.rep += 5;
     }
 
-    // Adds to the score of the player as a result of a major merit
+    // Adds to the rep of the player as a result of a major merit
     public void MajorGood()
     {
-        this.score += 20;
+        this.rep += 20;
     }
-
-    public void load() { }
 }
