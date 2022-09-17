@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
     private int nightCount = 0;
@@ -13,7 +14,8 @@ public class GameManager : MonoBehaviour
     //MajorProblem(), MinorProblem(), MajorGood(), MinorGood() and load() which can be left empty.
     //Each function when called will apply changes to Rep.
     //Also note: ONCE YOU CREATE THIS CLASS delete the DUMMY CLASS of ReputationTracker in the bottom of this script.
-    private ReputationTracker tracker;
+    
+    private RepuataionTracker tracker;
 
     private string activeText = "";
 
@@ -22,6 +24,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       
+
         instance = this;
 
         //Loading/serializing data.
@@ -53,6 +57,7 @@ public class GameManager : MonoBehaviour
                 break;
             case 3:
                 tracker.MajorGood();
+                
                 break;
         }
        
@@ -86,27 +91,5 @@ public class GameManager : MonoBehaviour
     void Update()
     {
      
-    }
-}
-
-
-//DUMMY CLASSES PLEASE IGNORE
-class CharacterSelector 
-{
-   public Character selectChar() { return new Character(); }
-}
-class Character
-{
-    public string getText() {
-        return "";
-    }
-    //0 is MAJOR PROBLEM (-20), 1 is MINOR PROBLEM(-5), 2 is Minor GOOD(+5), 3 is Major Good(+20)
-    public int Admit()
-    {
-        return 0;
-    }
-    public int Bounce()
-    {
-        return 0;
     }
 }

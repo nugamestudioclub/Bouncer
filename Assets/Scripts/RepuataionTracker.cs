@@ -8,28 +8,28 @@ public class RepuataionTracker : MonoBehaviour
     private int score;
 
     // Reduces the score of the player as a result of a major problem
-    void MajorProblem() 
+    public void MajorProblem() 
     {
         this.score -= 20;
     }
 
     // Reduces the score of the player as a result of a minor problem
-    void MinorProblem()
+    public void MinorProblem()
     {
         this.score -= 5;
     }
 
     // Adds to the score of the player as a result of a minor merit
-    void MinorGood()
+    public void MinorGood()
     {
         this.score += 5;
     }
 
     // Adds to the score of the player as a result of a major merit
-    void MajorGood()
+    public void MajorGood()
     {
         this.score += 20;
     }
 
-    public void load() { };
+    public void load() { }
 }
