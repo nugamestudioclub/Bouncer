@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     //MajorProblem(), MinorProblem(), MajorGood(), MinorGood() and load() which can be left empty.
     //Each function when called will apply changes to Rep.
     //Also note: ONCE YOU CREATE THIS CLASS delete the DUMMY CLASS of ReputationTracker in the bottom of this script.
-    private ReputationTracker tracker;
+    private RepuataionTracker tracker;
 
     private string activeText = "";
 
@@ -25,9 +25,9 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         //Loading/serializing data.
-        tracker.load();
         Character character = selector.selectChar();
         activeText = character.getText();
+        
     }
     
     //Iterates to the next night.
