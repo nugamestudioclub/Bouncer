@@ -10,6 +10,7 @@ public class DialogueNodeData {
    public List<string> conditions;
    public List<string> effects;
 
+
    public static DialogueNodeData CreateFromJSON(string jsonString) {
         DialogueNodeData data = JsonUtility.FromJson<DialogueNodeData>(jsonString);
         return data;
