@@ -43,16 +43,16 @@ public class GameManager : MonoBehaviour
         switch (character.Admit())
         {
             case 0:
-                //TODO: Call tracker.MajorProblem() function.
+                tracker.MajorProblem();
                 break;
             case 1:
-                //TODO: Call tracker.MinorProblem() function.
+                tracker.MinorProblem();
                 break;
             case 2:
-                //TODO: Call tracker.MinorGood() function.
+                tracker.MinorGood();
                 break;
             case 3:
-                //TODO: Call tracker.MajorGood() function.
+                tracker.MajorGood();
                 break;
         }
        
@@ -63,16 +63,16 @@ public class GameManager : MonoBehaviour
         switch (character.Bounce())
         {
             case 0:
-                //TODO: Call tracker.MajorProblem() function.
+                tracker.MajorProblem();
                 break;
             case 1:
-                //TODO: Call tracker.MinorProblem() function.
+                tracker.MinorProblem();
                 break;
             case 2:
-                //TODO: Call tracker.MinorGood() function.
+                tracker.MinorGood();
                 break;
             case 3:
-                //TODO: Call tracker.MajorGood() function.
+                tracker.MajorGood();
                 break;
         
         }
@@ -86,8 +86,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
      
-        
-
     }
 }
 
@@ -110,13 +108,5 @@ class Character
     public int Bounce()
     {
         return 0;
-    }
-}
-//REMOVE ONCE PROPER ReputationTracker class has been made.
-class ReputationTracker
-{
-    public void load()
-    {
-
     }
 }
