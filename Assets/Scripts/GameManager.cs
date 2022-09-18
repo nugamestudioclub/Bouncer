@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 public class GameManager : MonoBehaviour
@@ -24,15 +25,26 @@ public class GameManager : MonoBehaviour
 
     private NPC activeCharacter;
 
+    private List<bool> conditionStates;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 
         instance = this;
         //Loading/serializing data.
         NPC character = selector.SelectNPC();
         activeText = character.getText();
+        var values = Enum.GetValues(typeof(Condition));
+        conditionStates = new List<bool>(values.Length);
+        foreach(var _ in values) 
+            conditionStates.Add(false);
+        
+    }
 
+    public bool CheckCondition(Condition condition)
+    {
+        return conditionStates[(int)condition];
     }
 
     //Iterates to the next night.

@@ -10,7 +10,7 @@ public class DialogueNodeData
     public List<string> connections;
     public List<string> conditions;
     public List<string> effects;
-
+    public bool IsNPC { get; set; }
 
     public static DialogueNodeData CreateFromJSON(string jsonString)
     {

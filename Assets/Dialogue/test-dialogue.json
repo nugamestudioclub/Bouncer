@@ -1,19 +1,35 @@
 {
-  "name": "CharacterName",
-  "nodes": [
-    {
-      "label": "start",
-      "text": "lorum ipsum",
-      "connections": ["bounce", "admit"],
-      "conditions": ["3star", "midnight"],
-      "effects": ["reputation+"]
-    },
-    {
-      "label": "bounce",
-      "text": "go huskies",
-      "connections": [],
-      "conditions": [],
-      "effects": []
-    }
-  ]
+    "name": "CharacterName",
+    "npcNodes": [
+        {
+            "label": "start",
+            "text": "lorum ipsum",
+            "connections": [ "bounce", "admit" ],
+            "conditions": [ "3star", "midnight" ],
+            "effects": [ "reputation+" ]
+        },
+        {
+            "label": "bounce",
+            "text": "go huskies",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+        }
+    ],
+    "pcNodes": [
+        {
+            "label": "start",
+            "text": "lorum ipsum",
+            "connections": [ "bounce", "admit" ],
+            "conditions": [ "3star", "midnight" ],
+            "effects": [ "reputation+" ]
+        },
+        {
+            "label": "bounce",
+            "text": "go huskies",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+        }
+    ]
 }

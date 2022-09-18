@@ -12,8 +12,8 @@ public class Player {
         set => name = value;
     }
     //change current money by given amount (can be negative to decrease money)
-    public void changeMoney(int amount) {
+    public void changeMoney(int amount)
+    {
         this.money += amount;
     }
-
 }
