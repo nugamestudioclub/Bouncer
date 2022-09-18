@@ -94,9 +94,16 @@ public class GameManager : MonoBehaviour
     void IsLastCharacer()
     {
         //if is false
-        this.activeCharacter = selector.selectChar();
-        //if is true
-        this.ResetNight();
+        if (selector.isLast())
+        {
+            this.activeCharacter = selector.selectChar();
+        }
+        else
+        {
+            //if is true
+            this.ResetNight();
+        }
+       
     }
     
     /// <summary>
@@ -105,7 +112,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void ResetNight()
     {
-
+        
     }
     
 
