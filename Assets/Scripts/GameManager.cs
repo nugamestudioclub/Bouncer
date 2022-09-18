@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
     public static readonly int TotalNights = 3;
     public bool IsLastNight => NightCount == TotalNights;
 
-
-
     [SerializeField]
     private Transform NpcSpawn;
 
@@ -26,6 +24,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private PhoneMessengerView phone;
+
+    [SerializeField]
+    private IdCardView idCard;
 
     [SerializeField]
     private DialogueHandler handler;
@@ -150,6 +151,22 @@ public class GameManager : MonoBehaviour
         {
             this.setOptions(node);
         }
+    }
+
+    // void ShowCurrentId() {
+    //     ShowId(activeNpc);
+    // }
+
+    void ShowId(GameObject id) {
+        // GameObject id = null;// character.getId();
+        // if (id == null) { // character has no id
+        //     return;
+        // }
+        id.SetActive(true);
+    }
+
+    void FlipId() {
+
     }
 
     void getContinueButton(DialogueNode[] node)
