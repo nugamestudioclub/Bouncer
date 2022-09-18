@@ -113,7 +113,11 @@ class ScoreTracker
         }
     }
 
-  
+    public int CalcaulteFinalScore()
+    {
+        this.score = Mathf.RoundToInt(Mathf.Lerp(this.rep, this.money, 0.5f));
+        return Score;
+    }
 }
 
 class ConversationTracker {
