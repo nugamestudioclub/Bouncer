@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class DialogueHandler : MonoBehaviour
 {
-    CharacterDialogueReader dialogueReader;
-    CharacterDialogue dialogueTree;
+    NPCDialogueReader dialogueReader;
+    NPCDialogue dialogueTree;
     DialogueNode currentNode;
 
 
     // Start is called before the first frame update
     private void Awake()
     {
-        dialogueReader = new CharacterDialogueReader();
+        dialogueReader = new NPCDialogueReader();
     }
 
     void SetCharacterDialogue(string name)
@@ -31,10 +31,10 @@ public class DialogueHandler : MonoBehaviour
         return currentNode.Text;
     }
 
-    public List<DialogueNode> getLinkedNodes()
+    public List<DialogueNode> GetLinkedNodes()
     {
         List<DialogueNode> toReturn = new List<DialogueNode>();
-        foreach(DialogueNode node in dialogueTree.GetNodes())
+        foreach(DialogueNode node in dialogueTree.Nodes)
         {
             if(currentNode.Connections.Contains(node.Label))
             {

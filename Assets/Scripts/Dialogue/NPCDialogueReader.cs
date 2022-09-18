@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterDialogueReader : MonoBehaviour
+public class NPCDialogueReader : MonoBehaviour
 {
-    List<CharacterDialogue> list;
+    List<NPCDialogue> list;
     private string filepath;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        ReadCharacterDialogue();
+        ReadNPCDialogue();
     }
 
-    private void ReadCharacterDialogue()
+    private void ReadNPCDialogue()
     {
         string[] files = System.IO.Directory.GetFiles(filepath);
         foreach (string file in files)
@@ -23,14 +23,11 @@ public class CharacterDialogueReader : MonoBehaviour
             //Do work on the files here
         }
 
-
-
-
     }
 
-    public CharacterDialogue GetCharacterDialogue(string name)
+    public NPCDialogue GetCharacterDialogue(string name)
     {
-        foreach(CharacterDialogue dialogue in list)
+        foreach (NPCDialogue dialogue in list)
         {
             if (dialogue.Name.Equals(name))
             {

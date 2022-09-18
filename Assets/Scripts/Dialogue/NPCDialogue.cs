@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class CharacterDialogue
+public class NPCDialogue
 {
     public string Name { get; private set; }
     public List<DialogueNode> Nodes { get; private set; }
 
-    CharacterDialogue(CharacterDialogueData data) {
+    public NPCDialogue(NPCDialogueData data) {
         this.Name = data.name;
         List<DialogueNodeData> nodesData = data.nodes;
         List<DialogueNode> nodes = new List<DialogueNode>();
@@ -26,10 +26,5 @@ public class CharacterDialogue
             }
         }
         return null;
-    }
-
-    public List<DialogueNode> GetNodes()
-    {
-        return Nodes;
     }
 }

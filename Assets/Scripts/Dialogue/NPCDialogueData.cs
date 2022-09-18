@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class CharacterDialogueData
+public class NPCDialogueData
 {
     public string name;
-
     public List<DialogueNodeData> nodes;
 
-    public static CharacterDialogueData CreateFromJSON(string jsonString)
+    public static NPCDialogueData CreateFromJSON(string jsonString)
     {
-        CharacterDialogueData data = JsonUtility.FromJson<CharacterDialogueData>(jsonString);
+        NPCDialogueData data = JsonUtility.FromJson<NPCDialogueData>(jsonString);
         return data;
     }
 }

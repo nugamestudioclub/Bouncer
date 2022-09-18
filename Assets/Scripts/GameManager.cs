@@ -5,36 +5,32 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private int nightCount = 0;
-    public int NightCount { get { return nightCount; } }
+    public int NightCount { get; private set; }
+    public float GameTime { get; private set; }
 
-    private float gameTime = 0;
-    public float GameTime { get { return gameTime; } } 
-
-    private CharacterSelector selector;
+    private NPCSelector selector;
     private float characterTime = 0; // Tracks the time spent by 
-   
+
     //TODO: Create ReputationTracker.cs script and implement the following functions:
     //MajorProblem(), MinorProblem(), MajorGood(), MinorGood() and load() which can be left empty.
     //Each function when called will apply changes to Rep.
     //Also note: ONCE YOU CREATE THIS CLASS delete the DUMMY CLASS of ReputationTracker in the bottom of this script.
-    
-    private ReputationTracker tracker;
 
+    private ReputationTracker tracker;
 
     private string activeText = "";
 
     public static GameManager instance;
 
-    private Character activeCharacter;
+    private NPC activeCharacter;
 
     // Start is called before the first frame update
     void Start()
-    { 
+    {
 
         instance = this;
         //Loading/serializing data.
-        Character character = selector.selectChar();
+        NPC character = selector.SelectNPC();
         activeText = character.getText();
 
     }
@@ -42,46 +38,46 @@ public class GameManager : MonoBehaviour
     //Iterates to the next night.
     void IterateNight()
     {
-        this.nightCount++;
+        NightCount++;
         //run conditions.
     }
 
     //Will be called when a player clicks the "Admit" button.
-    void Admit(Character character)
+    void Admit(NPC character)
     {
-        switch (character.Admit())
+        switch (character.Effect)
         {
-            case 0:
+            case RepEffect.MajorProblem:
                 tracker.MajorProblem();
                 break;
-            case 1:
+            case RepEffect.MinorProblem:
                 tracker.MinorProblem();
                 break;
-            case 2:
+            case RepEffect.MinorGood:
                 tracker.MinorGood();
                 break;
-            case 3:
-                tracker.MajorGood();                
+            case RepEffect.MajorGood:
+                tracker.MajorGood();
                 break;
         }
 
     }
     //Will be called when the player clicks the "Bounce" button.
-    void Bounce(Character character)
+    void Bounce(NPC character)
     {
-        switch (character.Bounce())
+        switch (character.Effect)
         {
-            case 0:
-                tracker.MajorProblem();
+            case RepEffect.MajorProblem:
+                tracker.MajorGood();
                 break;
-            case 1:
-                tracker.MinorProblem();
-                break;
-            case 2:
+            case RepEffect.MinorProblem:
                 tracker.MinorGood();
                 break;
-            case 3:
-                tracker.MajorGood();
+            case RepEffect.MinorGood:
+                tracker.MinorProblem();
+                break;
+            case RepEffect.MajorGood:
+                tracker.MajorProblem();
                 break;
 
         }
@@ -90,7 +86,7 @@ public class GameManager : MonoBehaviour
     void CheckRepTooLow()
     {
         // If the reputation gets below a threshold, end game
-        if (tracker.Rep < tracker.EndThreshold)
+        if (tracker.Rep < ReputationTracker.EndThreshold)
         {
             this.EndGame();
         }
@@ -98,7 +94,7 @@ public class GameManager : MonoBehaviour
         // checks for the last character or we reset the night instead
         else
         {
-            this.IsLastCharacer();
+            this.IsLastCharacter();
         }
     }
 
@@ -107,20 +103,22 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void IsLastCharacer()
+    void IsLastCharacter()
     {
         // 
-        if (selector.isLast()) {
+        if (selector.IsLast())
+        {
 
-            this.activeCharacter = selector.selectChar();
+            this.activeCharacter = selector.SelectNPC();
         }
 
         // 
-        else {
+        else
+        {
             this.ResetNight();
         }
     }
-    
+
     /// <summary>
     /// if is END GAME
     /// if not new night
@@ -130,40 +128,40 @@ public class GameManager : MonoBehaviour
         this.IterateNight();
         ResetGameTime();
     }
-    
+
 
     void IterateChoice()
     {
 
     }
-    
+
     void Stormout()
     {
-                      
+
     }
 
     // Reset time when night ends
     void ResetGameTime()
     {
-        gameTime = 0;
+        GameTime = 0;
     }
 
     // Start the timer for a new character
     void StartCharacterTime()
     {
-        characterTime = gameTime;
+        characterTime = GameTime;
     }
 
     // Get the time spent by a character
     float GetCharacterTime()
     {
-        return gameTime - characterTime;
+        return GameTime - characterTime;
     }
 
     // Get the time remaining before patience runs out
-    float CharacterPatienceRemaining(Character character)
+    float CharacterPatienceRemaining(NPC character)
     {
-        return character.GetPatience() - GetCharacterTime(); 
+        return character.Patience - GetCharacterTime();
     }
 
     // Reset time for the next character in queue
@@ -181,6 +179,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameTime += Time.deltaTime;        
+        GameTime += Time.deltaTime;
     }
 }
