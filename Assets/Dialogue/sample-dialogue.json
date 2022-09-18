@@ -1,0 +1,49 @@
+{
+    "name": "Mr. Rogers",
+    "npcNodes": [
+        {
+            "label": "start",
+            "text": "Hey, how's it going?",
+            "connections": [ "bounce", "admit", "id" ],
+            "conditions": [],
+            "effects": []
+        },
+        {
+            "label": "show-id",
+            "text": "Go huskies!",
+            "connections": ["bounce", "admit"],
+            "conditions": [],
+            "effects": []
+        },
+        {
+            "label": "bounce-response",
+            "text": "that's so messed up",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+        }
+    ],
+    "pcNodes": [
+        {
+            "label": "bounce",
+            "text": "I'm bouncing you",
+            "connections": [ "bounce-response" ],
+            "conditions": [],
+            "effects": []
+        },
+        {
+            "label": "admit",
+            "text": "Go right in",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+        },
+        {
+            "label": "id",
+            "text": "Let me see your id",
+            "connections": ["show-id"],
+            "conditions": [],
+            "effects": []
+        }
+    ]
+}

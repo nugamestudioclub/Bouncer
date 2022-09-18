@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class NPCDialogue
+public class NPCDialogue : MonoBehaviour
 {
     public string Name { get; private set; }
     public Dictionary<string, DialogueNode> Nodes { get; private set; }
 
-    public NPCDialogue(NPCDialogueData data)
+    [SerializeField]
+    private TextAsset textData;
+    private void Awake()
     {
+        Initialize(NPCDialogueData.CreateFromJSON(textData.text));
+    }
+    public void Initialize(NPCDialogueData data) {
         Name = data.name;
         Nodes = new();
         foreach (DialogueNodeData nodeData in data.npcNodes)
@@ -22,6 +27,8 @@ public class NPCDialogue
             nodeData.IsNPC = false;
             Nodes[nodeData.label] = new DialogueNode(nodeData);
         }
+
+        print(Name);
     }
     public DialogueNode GetDialogueNode(string label)
     {
