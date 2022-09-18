@@ -1,20 +1,19 @@
 {
-   "name":"PlayerName",
-   "nodes":[
-      {
-         "label":"start",
-         "text":"lorum ipsum",
-         "connections":[
-            "bounce",
-            "admit"
-         ],
-         "conditions":[
-            "3star",
-            "midnight"
-         ],
-         "effects":[
-            "reputation+"
-         ]
-      }
-   ]
+  "name": "CharacterName",
+  "nodes": [
+    {
+      "label": "start",
+      "text": "lorum ipsum",
+      "connections": ["bounce", "admit"],
+      "conditions": ["3star", "midnight"],
+      "effects": ["reputation+"]
+    },
+    {
+      "label": "bounce",
+      "text": "go huskies",
+      "connections": [],
+      "conditions": [],
+      "effects": []
+    }
+  ]
 }

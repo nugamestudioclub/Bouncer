@@ -27,7 +27,7 @@ public class ExampleScript : MonoBehaviour
     {
         int randomSelect = Random.Range(0, hats.Count);
         hatRender.sprite = hats[randomSelect];
-        
+
         //randomSelect = Random.Range(0, head.Count);
 
     }

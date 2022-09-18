@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player {
     private string name;
     private int money;
-    private ArrayList<Item> inventory;
+    private List<Item> inventory;
 
     public string Name {
         get => name;

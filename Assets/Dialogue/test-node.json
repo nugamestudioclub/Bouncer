@@ -1,0 +1,15 @@
+{
+   "label": "start",
+   "text": "lorum ipsum",
+   "connections": [
+      "bounce",
+      "admit"
+   ],
+   "conditions": [
+      "3star",
+      "midnight"
+   ],
+   "effects": [
+      "reputation+"
+   ]
+}  
