@@ -45,6 +45,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Admit(NPC character) {
+		tracker.AdjustReputation(character.Effect);
+		EndCharacter();
+	}
+
+	void Bounce(NPC character) {
 		tracker.AdjustReputation(character.Effect switch {
 			RepEffect.MajorProblem => RepEffect.MajorGood,
 			RepEffect.MinorProblem => RepEffect.MinorGood,
@@ -52,11 +57,6 @@ public class GameManager : MonoBehaviour {
 			RepEffect.MajorGood => RepEffect.MajorProblem,
 			_ => RepEffect.None
 		});
-		EndCharacter();
-	}
-
-	void Bounce(NPC character) {
-		tracker.AdjustReputation(character.Effect);
 		EndCharacter();
 	}
 
