@@ -20,7 +20,7 @@ public class MySimple : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SelectOutfit();   
+        SelectOutfit();
     }
 
     void SelectOutfit()
@@ -34,6 +34,6 @@ public class MySimple : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
     }
 }

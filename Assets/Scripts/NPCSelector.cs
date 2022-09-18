@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSelector : MonoBehaviour
+public class NPCSelector : MonoBehaviour
 {
 
-    private Character[] characters;
+    private NPC[] characters;
 
 
     // Start is called before the first frame update
@@ -14,14 +14,14 @@ public class CharacterSelector : MonoBehaviour
         
     }
 
-    public Character selectChar()
+    public NPC SelectNPC()
     {
         int random = Random.Range(0, characters.Length);
         return characters[random];
     }
 
     //Dummy class
-    public bool isLast()
+    public bool IsLast()
     {
         return false;
     }
