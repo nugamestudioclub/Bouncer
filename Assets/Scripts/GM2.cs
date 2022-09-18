@@ -116,6 +116,7 @@ class ScoreTracker
     public int CalcaulteFinalScore()
     {
         this.score = Mathf.RoundToInt(Mathf.Lerp(this.rep, this.money, 0.5f));
+        PlayerPrefs.SetInt("score", this.score);
         return Score;
     }
 }
