@@ -25,9 +25,7 @@ public class GameManager : MonoBehaviour
     private Button continueButton;
 
     [SerializeField]
-    private PlayerDialogueView playerDialog;
-    [SerializeField]
-    private PlayerDialogueReplyView playerButtonsDialog;
+    private PhoneMessengerView phone;
 
     [SerializeField]
     private DialogueHandler handler;
@@ -143,79 +141,66 @@ public class GameManager : MonoBehaviour
     void IterateChoice()
     {
         DialogueNode[] node = handler.GetLinkedNodes().ToArray();
-        
+
         if (node[0].IsNPC)
         {
-            this.loadNpcText(node);
+            this.getContinueButton(node);
         }
         else
         {
-            this.loadPcText(node);
+            this.setOptions(node);
         }
     }
 
-    void loadNpcText(DialogueNode[] node)
+    void getContinueButton(DialogueNode[] node)
     {
-        //TODO: Fix.
-        playerDialog.Clear();
-        playerDialog.Add(new TextMessage(1, node[0].Text));
+        phone.Clear();
+        phone.Add(new TextMessage(1, node[0].Text));
 
         continueButton.gameObject.SetActive(true);
-
-        
     }
 
-    void loadPcText(DialogueNode[] node)
+    void setOptions(DialogueNode[] node)
     {
         for (int i = 0; i <= 0; i++)
         {
             DialogueNode currentNode = node[i];
             string text = currentNode.Text;
 
-            playerDialog.Add(new TextMessage(0, text));
+            phone.Add(new TextMessage(0, text));
         }
-    }
-    void Stormout()
-    {
 
-    }
-
-    // Start the timer for a new character
-    void StartCharacterTime()
-    {
-        characterTime = GameTime;
-    }
-
-    // Get the time spent by a character
-    float GetCharacterTime()
-    {
-        return GameTime - characterTime;
-    }
-
-    float CharacterPatienceRemaining(NPC character)
-    {
-        return character.Patience - GetCharacterTime();
-    }
-
-    // Reset time for the next character in queue
-    void ResetCharacterTime()
-    {
-        characterTime = 0;
-    }
-
-    void Update()
-    {
-        GameTime += Time.deltaTime;
-    }
-
-    private IEnumerator<WaitForSeconds> PaitienceTimer()
-    {
-        int localCounter = 0 + messageCounter;
-
-        yield return new WaitForSeconds(this.activeCharacter.Patience);
-        if (localCounter == messageCounter)
+        void Stormout()
         {
-            Stormout();
+
+        }
+
+        // Start the timer for a new character
+        void StartCharacterTime()
+        {
+            characterTime = GameTime;
+        }
+
+        // Get the time spent by a character
+        float GetCharacterTime()
+        {
+            return GameTime - characterTime;
+        }
+
+        float CharacterPatienceRemaining(NPC character)
+        {
+            return character.Patience - GetCharacterTime();
+        }
+
+        // Reset time for the next character in queue
+        void ResetCharacterTime()
+        {
+            characterTime = 0;
+        }
+
+        void Update()
+        {
+            GameTime += Time.deltaTime;
         }
     }
 }
