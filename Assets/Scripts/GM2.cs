@@ -113,7 +113,11 @@ class ScoreTracker
         }
     }
 
-  
+    public int CalcaulteFinalScore()
+    {
+        this.score = Mathf.RoundToInt(Mathf.Lerp(this.rep, this.money, 0.5f));
+        return Score;
+    }
 }
 
 class ConversationTracker {
@@ -147,13 +151,14 @@ class ConversationTracker {
     }
     public void NextDialog()
     {
-        DialogueNode[] node = handler.GetLinkedNodes().ToArray();
-        if (node.Length != 0)
+        DialogueNode[] nodes = handler.GetLinkedNodes().ToArray();
+        if (nodes.Length != 0)
         {
-            if (node[0].IsNPC)
+            if (nodes[0].IsNPC)
             {
                 //DISPLAY NPC "NEXT" BUTTON USING GUI ELEMENTS and DIALOG BOX
-
+                DialogueNode selected = nodes[0];
+                //TODO DISPLAY IT
 
                 //Restart Timer for Paitience
                 ResetTimer();
@@ -161,6 +166,10 @@ class ConversationTracker {
             else
             {
                 //DISPLAY PLAYER DIALOG BUTTONS USING GUI ELEMENTS and DIALOG BOX
+                int selectedNum = 0;
+                DialogueNode selected = nodes[selectedNum];
+                //TODO DISPLAY
+
 
                 //Restart Timer for Paitience
                 ResetTimer();
