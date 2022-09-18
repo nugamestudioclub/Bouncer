@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using TMPro;
 
 public class GM2 : MonoBehaviour
 {
@@ -20,6 +21,14 @@ public class GM2 : MonoBehaviour
     private ConversationTracker convo;
     private Night night;
 
+    [SerializeField]
+    private TMP_Text guiMoney;
+    [SerializeField]
+    private TMP_Text guiRep;
+    [SerializeField]
+    private TMP_Text guiNightCount;
+    [SerializeField]
+    private SpriteRenderer clockHandTimer;
 
 
     void Start()
@@ -42,6 +51,15 @@ public class GM2 : MonoBehaviour
 
     void Update()
     {
+        guiMoney.text = "$" + tracker.Money.ToString();
+        guiRep.text = tracker.Reputation.ToString();
+        guiNightCount.text = tracker.NightCount.ToString();
+        
+        float rotAngle = (convo.Timer / 60) * 360;
+        //TODO:Test this.
+        clockHandTimer.gameObject.transform.localEulerAngles = new Vector3(clockHandTimer.transform.localEulerAngles.x,
+            clockHandTimer.transform.localEulerAngles.y,
+            rotAngle);
 
         convo.IterateTimer();
         GameTime += Time.deltaTime;
@@ -78,10 +96,12 @@ class ScoreTracker
     private int score;
     private int rep;
     private int money;
+    private int nightCount;
     public int Score { get { return this.score; } }
     public int Reputation { get { return this.rep; } }
     public int Money { get { return this.money; } }
 
+    public int NightCount { get { return this.nightCount; } }
     public ScoreTracker()
     {
         this.score = 0;
@@ -92,6 +112,8 @@ class ScoreTracker
     public void EndNight()
     {
         this.money += Random.Range(rep / 4, rep / 2);
+        this.nightCount += 1;
+       
     }
 
     public void CalculateEffect(NPC character,DecisionType type)
@@ -128,6 +150,7 @@ class ConversationTracker {
     private bool isTimerRunning;
     private ScoreTracker tracker;
     private Night night;
+    public float Timer { get { return Mathf.Clamp(this.timer,0,60); } }
     public ConversationTracker(DialogueHandler handler,ScoreTracker tracker,Night night)
     {
         this.handler = handler;

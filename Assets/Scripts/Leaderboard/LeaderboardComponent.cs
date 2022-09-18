@@ -14,6 +14,7 @@ public class LeaderboardComponent : MonoBehaviour
     int leaderboardID = 7117;
 
     public GUILeaderboard gui;
+
  
 
     // Start is called before the first frame update
