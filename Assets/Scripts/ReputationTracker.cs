@@ -1,36 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ReputationTracker : MonoBehaviour
-{
-    public int Rep { get; private set; }
-    public static readonly int EndThreshold = -100;
-    public static readonly int MINOR = 5;
-    public static readonly int MAJOR = 20;
+public class ReputationTracker : MonoBehaviour {
+	public int Rep { get; private set; }
 
+	public void AdjustReputation(RepEffect repEffect) {
+		Rep += CalcReputation(repEffect);
+	}
 
-    // Reduces the rep of the player as a result of a major problem
-    public void MajorProblem()
-    {
-        this.Rep -= MAJOR;
-    }
+	public bool IsReputationBad => Rep < -100;
 
-    // Reduces the rep of the player as a result of a minor problem
-    public void MinorProblem()
-    {
-        this.Rep -= MINOR;
-    }
-
-    // Adds to the rep of the player as a result of a minor merit
-    public void MinorGood()
-    {
-        this.Rep += MINOR;
-    }
-
-    // Adds to the rep of the player as a result of a major merit
-    public void MajorGood()
-    {
-        this.Rep += MAJOR;
-    }
+	private static int CalcReputation(RepEffect repEffect) {
+		return repEffect switch {
+			RepEffect.MajorProblem => -20,
+			RepEffect.MinorProblem => -5,
+			RepEffect.MinorGood => 5,
+			RepEffect.MajorGood => 20,
+			_ => 0
+		};
+	}
 }

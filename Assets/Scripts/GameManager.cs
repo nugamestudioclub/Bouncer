@@ -1,196 +1,112 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 
-public class GameManager : MonoBehaviour
-{
-    public int NightCount { get; private set; }
-    public float GameTime { get; private set; }
+public class GameManager : MonoBehaviour {
+	public int NightCount { get; private set; }
+	public float GameTime { get; private set; }
+	bool IsOutOfTime => false; // TODO
 
-    private NPCSelector selector;
-    private float characterTime = 0; // Tracks the time spent by 
+	private NPCSelector selector;
+	private float characterTime = 0; // Tracks the time spent by 
 
-    //TODO: Create ReputationTracker.cs script and implement the following functions:
-    //MajorProblem(), MinorProblem(), MajorGood(), MinorGood() and load() which can be left empty.
-    //Each function when called will apply changes to Rep.
-    //Also note: ONCE YOU CREATE THIS CLASS delete the DUMMY CLASS of ReputationTracker in the bottom of this script.
+	//TODO: Create ReputationTracker.cs script and implement the following functions:
+	//MajorProblem(), MinorProblem(), MajorGood(), MinorGood() and load() which can be left empty.
+	//Each function when called will apply changes to Rep.
+	//Also note: ONCE YOU CREATE THIS CLASS delete the DUMMY CLASS of ReputationTracker in the bottom of this script.
 
-    private ReputationTracker tracker;
+	private ReputationTracker tracker;
 
-    private string activeText = "";
+	public static GameManager instance;
 
-    public static GameManager instance;
+	private NPC activeCharacter;
 
-    private NPC activeCharacter;
+	private List<bool> conditionStates;
 
-    private List<bool> conditionStates;
+	void Awake() {
+		instance = this;
+		conditionStates = MakeConditionStates();
+	}
 
-    // Start is called before the first frame update
-    void Awake()
-    {
+	private List<bool> MakeConditionStates() {
+		int count = Enumerable.Max((int[])Enum.GetValues(typeof(Condition)));
+		var conditionStates = new List<bool>(count);
 
-        instance = this;
-        //Loading/serializing data.
-        NPC character = selector.SelectNPC();
-        activeText = character.getText();
-        var values = Enum.GetValues(typeof(Condition));
-        conditionStates = new List<bool>(values.Length);
-        foreach(var _ in values) 
-            conditionStates.Add(false);
-        
-    }
+		for( int i = 0; i < count; ++i )
+			conditionStates.Add(false);
 
-    public bool CheckCondition(Condition condition)
-    {
-        return conditionStates[(int)condition];
-    }
+		return conditionStates;
+	}
 
-    //Iterates to the next night.
-    void IterateNight()
-    {
-        NightCount++;
-        //run conditions.
-    }
+	public bool CheckCondition(Condition condition) {
+		return conditionStates[(int)condition];
+	}
 
-    //Will be called when a player clicks the "Admit" button.
-    void Admit(NPC character)
-    {
-        switch (character.Effect)
-        {
-            case RepEffect.MajorProblem:
-                tracker.MajorProblem();
-                break;
-            case RepEffect.MinorProblem:
-                tracker.MinorProblem();
-                break;
-            case RepEffect.MinorGood:
-                tracker.MinorGood();
-                break;
-            case RepEffect.MajorGood:
-                tracker.MajorGood();
-                break;
-        }
+	void Admit(NPC character) {
+		tracker.AdjustReputation(character.Effect switch {
+			RepEffect.MajorProblem => RepEffect.MajorGood,
+			RepEffect.MinorProblem => RepEffect.MinorGood,
+			RepEffect.MinorGood => RepEffect.MinorProblem,
+			RepEffect.MajorGood => RepEffect.MajorProblem,
+			_ => RepEffect.None
+		});
+		EndCharacter();
+	}
 
-    }
-    //Will be called when the player clicks the "Bounce" button.
-    void Bounce(NPC character)
-    {
-        switch (character.Effect)
-        {
-            case RepEffect.MajorProblem:
-                tracker.MajorGood();
-                break;
-            case RepEffect.MinorProblem:
-                tracker.MinorGood();
-                break;
-            case RepEffect.MinorGood:
-                tracker.MinorProblem();
-                break;
-            case RepEffect.MajorGood:
-                tracker.MajorProblem();
-                break;
+	void Bounce(NPC character) {
+		tracker.AdjustReputation(character.Effect);
+		EndCharacter();
+	}
 
-        }
-    }
+	void EndCharacter() {
+		if( tracker.IsReputationBad )
+			EndGame();
+		else if( IsOutOfTime || selector.IsLast() )
+			EndNight();
+		else
+			activeCharacter = selector.SelectNPC();
+	}
 
-    void CheckRepTooLow()
-    {
-        // If the reputation gets below a threshold, end game
-        if (tracker.Rep < ReputationTracker.EndThreshold)
-        {
-            this.EndGame();
-        }
+	void EndNight() {
+		++NightCount;
+		GameTime = 0;
+	}
 
-        // checks for the last character or we reset the night instead
-        else
-        {
-            this.IsLastCharacter();
-        }
-    }
+	void EndGame() {
 
-    void EndGame()
-    {
+	}
 
-    }
+	void IterateChoice() {
 
-    void IsLastCharacter()
-    {
-        // 
-        if (selector.IsLast())
-        {
+	}
 
-            this.activeCharacter = selector.SelectNPC();
-        }
+	void Stormout() {
 
-        // 
-        else
-        {
-            this.ResetNight();
-        }
-    }
+	}
 
-    /// <summary>
-    /// if is END GAME
-    /// if not new night
-    /// </summary>
-    void ResetNight()
-    {
-        this.IterateNight();
-        ResetGameTime();
-    }
+	// Start the timer for a new character
+	void StartCharacterTime() {
+		characterTime = GameTime;
+	}
 
+	// Get the time spent by a character
+	float GetCharacterTime() {
+		return GameTime - characterTime;
+	}
 
-    void IterateChoice()
-    {
+	// Get the time remaining before patience runs out
+	float CharacterPatienceRemaining(NPC character) {
+		return character.Patience - GetCharacterTime();
+	}
 
-    }
+	// Reset time for the next character in queue
+	void ResetCharacterTime() {
+		characterTime = 0;
+	}
 
-    void Stormout()
-    {
-
-    }
-
-    // Reset time when night ends
-    void ResetGameTime()
-    {
-        GameTime = 0;
-    }
-
-    // Start the timer for a new character
-    void StartCharacterTime()
-    {
-        characterTime = GameTime;
-    }
-
-    // Get the time spent by a character
-    float GetCharacterTime()
-    {
-        return GameTime - characterTime;
-    }
-
-    // Get the time remaining before patience runs out
-    float CharacterPatienceRemaining(NPC character)
-    {
-        return character.Patience - GetCharacterTime();
-    }
-
-    // Reset time for the next character in queue
-    void ResetCharacterTime()
-    {
-        characterTime = 0;
-    }
-
-    bool IsOutOfTime()
-    {
-        //reference global timer    
-        return false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        GameTime += Time.deltaTime;
-    }
+	void Update() {
+		GameTime += Time.deltaTime;
+	}
 }
