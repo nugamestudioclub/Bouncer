@@ -6,25 +6,25 @@ using UnityEngine;
 public class NPCDialogue
 {
     public string Name { get; private set; }
-    public List<DialogueNode> Nodes { get; private set; }
+    public Dictionary<string, DialogueNode> Nodes { get; private set; }
 
-    public NPCDialogue(NPCDialogueData data) {
-        this.Name = data.name;
-        List<DialogueNodeData> nodesData = data.nodes;
-        List<DialogueNode> nodes = new List<DialogueNode>();
-        foreach(DialogueNodeData nodeData in nodesData) {
-            nodes.Add(new DialogueNode(nodeData));
-        }
-        this.Nodes = nodes;
-    }
-    public DialogueNode GetDialogueNode(Label label)
+    public NPCDialogue(NPCDialogueData data)
     {
-        foreach(DialogueNode node in Nodes)
+        Name = data.name;
+        Nodes = new();
+        foreach (DialogueNodeData nodeData in data.npcNodes)
         {
-            if(node.Label.Equals(label)) {
-                return node;
-            }
+            nodeData.IsNPC = true;
+            Nodes[nodeData.label] = new DialogueNode(nodeData);
         }
-        return null;
+        foreach (DialogueNodeData nodeData in data.pcNodes)
+        {
+            nodeData.IsNPC = false;
+            Nodes[nodeData.label] = new DialogueNode(nodeData);
+        }
+    }
+    public DialogueNode GetDialogueNode(string label)
+    {
+        return Nodes[label];
     }
 }

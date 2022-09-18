@@ -18,7 +18,7 @@ public class DialogueHandler : MonoBehaviour
     void SetCharacterDialogue(string name)
     {
         dialogueTree = dialogueReader.GetCharacterDialogue(name);
-        SetCurrentNode(dialogueTree.GetDialogueNode(Label.Intro));
+        SetCurrentNode(dialogueTree.GetDialogueNode("start"));
     }
 
     void SetCurrentNode(DialogueNode node)
@@ -31,16 +31,13 @@ public class DialogueHandler : MonoBehaviour
         return currentNode.Text;
     }
 
-    public List<DialogueNode> GetLinkedNodes()
+
+    public IEnumerable<DialogueNode> GetLinkedNodes()
     {
-        List<DialogueNode> toReturn = new List<DialogueNode>();
-        foreach(DialogueNode node in dialogueTree.Nodes)
+        foreach(var label in currentNode.Connections)
         {
-            if(currentNode.Connections.Contains(node.Label))
-            {
-                toReturn.Add(node);
-            }
+            //TODO: add if conditions are true
+            yield return dialogueTree.GetDialogueNode(label);
         }
-        return toReturn;
     }
 }

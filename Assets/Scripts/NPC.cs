@@ -2,22 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC
+public class NPC : MonoBehaviour
 {
-    public string[] Texts { get; private set; }
+    [field: SerializeField]
+    public NPCDialogue Dialogue  { get; private set; }
+    //public string[] Texts { get; private set; }
+    [field: SerializeField]
     public RepEffect Effect { get; private set; }
-    private int index = 0;
+    // private int index = 0;
+    [field: SerializeField]
     public float Patience { get; private set; }
 
-    public NPC(string[] texts, RepEffect effect, int patience)
-    {
-        Texts = texts;
-        Effect = effect;
-        Patience = patience;
-    }
-    public string getText()
-    {
-        index = (index + 1) % (Texts.Length);
-        return Texts[index];
-    }
+    [SerializeField]
+    private NPCSprite sprite;
 }

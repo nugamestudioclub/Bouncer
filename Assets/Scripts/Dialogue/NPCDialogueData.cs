@@ -6,7 +6,8 @@ using UnityEngine;
 public class NPCDialogueData
 {
     public string name;
-    public List<DialogueNodeData> nodes;
+    public List<DialogueNodeData> npcNodes;
+    public List<DialogueNodeData> pcNodes;
 
     public static NPCDialogueData CreateFromJSON(string jsonString)
     {
