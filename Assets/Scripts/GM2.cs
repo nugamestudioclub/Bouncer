@@ -14,13 +14,6 @@ public class GM2 : MonoBehaviour
     private Transform NpcSpawn;
     [SerializeField]
     private DialogueHandler handler;
-
-    //Private Non-Serialized
-    private float GameTime = 0;
-    private ScoreTracker tracker;
-    private ConversationTracker convo;
-    private Night night;
-
     [SerializeField]
     private TMP_Text guiMoney;
     [SerializeField]
@@ -29,6 +22,19 @@ public class GM2 : MonoBehaviour
     private TMP_Text guiNightCount;
     [SerializeField]
     private SpriteRenderer clockHandTimer;
+    [SerializeField]
+    private MusicManager musicManager;
+    
+
+
+    //Private Non-Serialized
+    private float GameTime = 0;
+    private ScoreTracker tracker;
+    private ConversationTracker convo;
+    private Night night;
+
+
+
 
 
     void Start()
@@ -42,11 +48,13 @@ public class GM2 : MonoBehaviour
     public void RunBounce(NPC character)
     {
         tracker.CalculateEffect(character, DecisionType.BOUNCE);
+
     }
 
     public void RunAdmit(NPC character)
     {
         tracker.CalculateEffect(character, DecisionType.ADMIT);
+        StartCoroutine(DoorOpenShut());
     }
 
     void Update()
@@ -63,6 +71,14 @@ public class GM2 : MonoBehaviour
 
         convo.IterateTimer();
         GameTime += Time.deltaTime;
+    }
+
+
+    IEnumerator DoorOpenShut()
+    {
+        musicManager.openDoor();
+        yield return new WaitForSeconds(3);
+        musicManager.closeDoor();
     }
 
 }
