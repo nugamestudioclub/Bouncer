@@ -12,13 +12,15 @@ public class MusicManager : MonoBehaviour
     float lastTime;
     const float MIN_FREQ = 500;
     const float MAX_FREQ = 15000;
+    private AudioLowPassFilter lpf;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<AudioLowPassFilter>().cutoffFrequency = MIN_FREQ;
-        GetComponent<AudioLowPassFilter>().lowpassResonanceQ = 1.5f;
+        lpf = GetComponent<AudioLowPassFilter>();
+        lpf.cutoffFrequency = MIN_FREQ;
+        lpf.lowpassResonanceQ = 1.5f;
 
         
 
@@ -52,10 +54,10 @@ public class MusicManager : MonoBehaviour
     IEnumerator OpenDoor()
     {
         lastTime = Time.time;
-        while(GetComponent<AudioLowPassFilter>().cutoffFrequency < MAX_FREQ)
+        while(lpf.cutoffFrequency < MAX_FREQ)
         {
-            GetComponent<AudioLowPassFilter>().cutoffFrequency = Mathf.Clamp(Mathf.Pow((Time.time - lastTime) + 1, 8) + MIN_FREQ, MIN_FREQ, MAX_FREQ);
-            Debug.Log(GetComponent<AudioLowPassFilter>().cutoffFrequency);
+           lpf.cutoffFrequency = Mathf.Clamp(Mathf.Pow((Time.time - lastTime) + 1, 8) + MIN_FREQ, MIN_FREQ, MAX_FREQ);
+            Debug.Log(lpf.cutoffFrequency);
             yield return new WaitForSeconds(.1f);
         }
 
@@ -64,10 +66,10 @@ public class MusicManager : MonoBehaviour
     IEnumerator CloseDoor()
     {
         lastTime = Time.time;
-        while (GetComponent<AudioLowPassFilter>().cutoffFrequency > MIN_FREQ)
+        while (lpf.cutoffFrequency > MIN_FREQ)
         {          
-            GetComponent<AudioLowPassFilter>().cutoffFrequency = Mathf.Clamp(-(Time.time - lastTime) * MAX_FREQ + MAX_FREQ, MIN_FREQ, MAX_FREQ);
-            Debug.Log(GetComponent<AudioLowPassFilter>().cutoffFrequency);
+           lpf.cutoffFrequency = Mathf.Clamp(-(Time.time - lastTime) * MAX_FREQ + MAX_FREQ, MIN_FREQ, MAX_FREQ);
+            Debug.Log(lpf.cutoffFrequency);
             Debug.Log(Time.time - lastTime);
             yield return new WaitForSeconds(.1f);
         }
