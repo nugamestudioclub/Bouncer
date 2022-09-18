@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GUILeaderboard : MonoBehaviour
 {
     public GameObject scoreItem;
-    private int offset = 1;
+    private int offset = 0;
     [SerializeField]
     private int appliedOffset = 50;
     
@@ -27,11 +27,19 @@ public class GUILeaderboard : MonoBehaviour
         offset += 1;
     }
 
+    public void Load(SerializedLeaderboardData[] data)
+    {
+        foreach(SerializedLeaderboardData item in data)
+        {
+            CreateNewItem(item.name, item.score);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-            CreateNewItem("seb", 5);
+        //if (Input.GetKeyDown(KeyCode.Space))
+           // CreateNewItem("seb", 5);
     }
 
 
