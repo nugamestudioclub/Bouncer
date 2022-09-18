@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour {
@@ -11,6 +12,15 @@ public class GameManager : MonoBehaviour {
 
 	private NPCSelector selector;
 	private float characterTime = 0; // Tracks the time spent by 
+
+	[SerializeField]
+	private Button continueButton;
+
+	[SerializeField]
+	private PhoneMessengerView phone;
+
+	[SerializeField]
+	private DialogueHandler handler;
 
 	//TODO: Create ReputationTracker.cs script and implement the following functions:
 	//MajorProblem(), MinorProblem(), MajorGood(), MinorGood() and load() which can be left empty.
@@ -78,10 +88,44 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-	void IterateChoice() {
 
+    void IterateChoice()
+    {
+		DialogueNode[] node = handler.GetLinkedNodes().ToArray();
+
+		if (node[0].IsNPC)
+        {
+			this.getContinueButton(node);
+        }
+        else
+        {
+			this.setOptions(node);
+        }
 	}
 
+	void getContinueButton(DialogueNode[] node)
+    {
+		phone.Clear();
+		phone.Add(new TextMessage(1, node[0].Text));
+
+		continueButton.gameObject.SetActive(true);
+
+
+    }
+
+	void setOptions(DialogueNode[] node)
+    {
+		for(int i=0; i <= 0; i++)
+        {
+			DialogueNode currentNode = node[i];
+			string text = currentNode.Text;
+
+			phone.Add(new TextMessage(0, text));
+        }
+
+
+    }
+	
 	void Stormout() {
 
 	}
