@@ -329,8 +329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56329e18f83e05a4e9a15d92112bc089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 5000
-  playerName: Seb
+  score: 100
+  playerName: Seabass
   gui: {fileID: 386787785}
 --- !u!1 &716611286
 GameObject:

@@ -23,7 +23,10 @@ public class GUILeaderboard : MonoBehaviour
         GameObject obj = Instantiate(scoreItem, this.transform);
         obj.GetComponent<LeaderboardScore>().SetName(name);
         obj.GetComponent<LeaderboardScore>().SetValue(score);
-        obj.transform.position += Vector3.down * appliedOffset*offset;
+        print(Screen.height);
+        
+        
+        obj.transform.position += Vector3.down * appliedOffset*offset*Screen.height*0.002f;
         offset += 1;
     }
 
