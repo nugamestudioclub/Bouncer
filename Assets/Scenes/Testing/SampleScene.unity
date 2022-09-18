@@ -215,11 +215,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56329e18f83e05a4e9a15d92112bc089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 1500
+  playerName: Seb
 --- !u!1 &668152506
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +247,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668152506}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c79bbc8077e8e1f438694065182a681c, type: 3}
   m_Name: 
@@ -331,6 +333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 927873411}
   - component: {fileID: 927873410}
+  - component: {fileID: 927873412}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -345,7 +348,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927873409}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c82b29f0f6b5b04b8644d8673423bae, type: 3}
   m_Name: 
@@ -365,3 +368,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &927873412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927873409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56329e18f83e05a4e9a15d92112bc089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 500
+  playerName: Mitch

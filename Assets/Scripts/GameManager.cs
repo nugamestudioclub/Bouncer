@@ -4,14 +4,21 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class GameManager : MonoBehaviour {
 	public int NightCount { get; private set; }
 	public float GameTime { get; private set; }
 	bool IsOutOfTime => false; // TODO
+    public static readonly int TotalNights = 3;
+    public bool IsLastNight => NightCount == TotalNights;
 
-	private NPCSelector selector;
-	private float characterTime = 0; // Tracks the time spent by 
+
+
+    [SerializeField]
+    private Transform NpcSpawn;
+
+    [SerializeField]
+    private NPCSelector selector;
+    private float characterTime = 0; // Tracks the time spent by 
 
 	[SerializeField]
 	private Button continueButton;
@@ -22,25 +29,29 @@ public class GameManager : MonoBehaviour {
 	[SerializeField]
 	private DialogueHandler handler;
 
-	//TODO: Create ReputationTracker.cs script and implement the following functions:
-	//MajorProblem(), MinorProblem(), MajorGood(), MinorGood() and load() which can be left empty.
-	//Each function when called will apply changes to Rep.
-	//Also note: ONCE YOU CREATE THIS CLASS delete the DUMMY CLASS of ReputationTracker in the bottom of this script.
+    //TODO: Create ReputationTracker.cs script and implement the following functions:
+    //MajorProblem(), MinorProblem(), MajorGood(), MinorGood() and load() which can be left empty.
+    //Each function when called will apply changes to Rep.
+    //Also note: ONCE YOU CREATE THIS CLASS delete the DUMMY CLASS of ReputationTracker in the bottom of this script.
 
-	private ReputationTracker tracker;
+    [SerializeField]
+    private ReputationTracker tracker;
 
-	public static GameManager instance;
+    public static GameManager instance;
 
 	private NPC activeCharacter;
+    private NPC activeNpc;
 
-	private List<bool> conditionStates;
+    private List<bool> conditionStates;
 
-	void Awake() {
-		instance = this;
-		conditionStates = MakeConditionStates();
-	}
+    void Awake()
+    {
+        instance = this;
+        conditionStates = MakeConditionStates();
+        BeginNight();
+    }
 
-	private List<bool> MakeConditionStates() {
+    private List<bool> MakeConditionStates() {
 		int count = Enumerable.Max((int[])Enum.GetValues(typeof(Condition)));
 		var conditionStates = new List<bool>(count);
 
@@ -50,11 +61,34 @@ public class GameManager : MonoBehaviour {
 		return conditionStates;
 	}
 
-	public bool CheckCondition(Condition condition) {
+    public void BeginNight()
+    {
+        InitializeNextNpc();
+    }
+
+    public void InitializeNextNpc()
+    {
+        activeNpc = selector.SelectNPC();
+        GameObject go = Instantiate(activeNpc.gameObject, NpcSpawn);
+        activeNpc = go.GetComponent<NPC>();
+        Debug.Log($"Npc is null: {activeNpc == null}");
+    }
+
+    public bool CheckCondition(Condition condition) {
 		return conditionStates[(int)condition];
 	}
 
-	void Admit(NPC character) {
+    public void AdmitCurrentNpc()
+    {
+        Admit(activeNpc);
+    }
+
+    public void BounceCurrentNpc()
+    {
+        Bounce(activeNpc);
+    }
+
+    void Admit(NPC character) {
 		tracker.AdjustReputation(character.Effect);
 		EndCharacter();
 	}
@@ -70,23 +104,29 @@ public class GameManager : MonoBehaviour {
 		EndCharacter();
 	}
 
-	void EndCharacter() {
-		if( tracker.IsReputationBad )
-			EndGame();
-		else if( IsOutOfTime || selector.IsLast() )
-			EndNight();
-		else
-			activeCharacter = selector.SelectNPC();
-	}
+    void EndCharacter()
+    {
+        Destroy(activeNpc.gameObject);
+        if (tracker.IsReputationBad)
+            EndGame();
+        else if (IsOutOfTime || selector.IsLast())
+            EndNight();
+        else
+            InitializeNextNpc();
+    }
 
-	void EndNight() {
-		++NightCount;
-		GameTime = 0;
-	}
 
-	void EndGame() {
+    void EndNight()
+    {
+        ++NightCount;
+        GameTime = 0;
+        if (IsLastNight)
+            EndGame();
+    }
 
-	}
+    void EndGame() {
+        //TODO: TRANSITION TO LEADERBOARD
+    }
 
 
     void IterateChoice()
@@ -109,8 +149,6 @@ public class GameManager : MonoBehaviour {
 		phone.Add(new TextMessage(1, node[0].Text));
 
 		continueButton.gameObject.SetActive(true);
-
-
     }
 
 	void setOptions(DialogueNode[] node)
@@ -122,9 +160,6 @@ public class GameManager : MonoBehaviour {
 
 			phone.Add(new TextMessage(0, text));
         }
-
-
-    }
 	
 	void Stormout() {
 
@@ -140,7 +175,6 @@ public class GameManager : MonoBehaviour {
 		return GameTime - characterTime;
 	}
 
-	// Get the time remaining before patience runs out
 	float CharacterPatienceRemaining(NPC character) {
 		return character.Patience - GetCharacterTime();
 	}
