@@ -7,9 +7,17 @@ public class TextMessage {
 
 	public UnityAction OnReceive { get; private set; }
 
-	public TextMessage(int speakerId, string text, UnityAction onReceive = null) {
+	public UnityAction OnEmotion { get; private set; }
+
+	public TextMessage(
+		int speakerId,
+		string text,
+		UnityAction onReceive = null,
+		UnityAction onEmotion = null
+	) {
 		SpeakerId = speakerId;
 		Text = text;
 		OnReceive = onReceive;
+		OnEmotion = onEmotion;
 	}
 }

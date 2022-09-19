@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -13,29 +14,38 @@ public class DialogueNode
     public List<Condition> Conditions { get; private set; }
     public List<Effects> Effects { get; private set; }
 
+    public Emotion Emotion { get; private set; }
+
     public bool IsNPC { get; private set; }
 
     public DialogueNode(DialogueNodeData data)
     {
-        this.Label = data.label;
-        this.Text = data.text;
+        Label = data.label;
+        Text = data.text;
+
+        var enumNames = from x in Enum.GetNames(typeof(Emotion)) select x.ToLower();
+        var enumValues = (int[])Enum.GetValues(typeof(Emotion));
+
+        Emotion = string.IsNullOrEmpty(data.emotion)
+            ? Emotion.Neutral
+            : (Emotion)enumValues[enumNames.ToList().IndexOf(data.emotion.ToLower())];
 
         //TODO Abstract redundant behavior
-        this.Connections = new ();
+        Connections = new ();
         foreach (string connection in data.connections)
         {
-            this.Connections.Add(connection);
+            Connections.Add(connection);
         }
-        this.Conditions = new ();
+        Conditions = new ();
         foreach (string condition in data.conditions)
         {
-            this.Conditions.Add(Enum.Parse<Condition>(condition));
+            Conditions.Add(Enum.Parse<Condition>(condition));
         }
         // data.conditions.Map(condition => Enum.Parse<Condition>(condition));
-        this.Effects = new ();
+        Effects = new ();
         foreach (string effect in data.effects)
         {
-            this.Effects.Add(Enum.Parse<Effects>(effect));
+            Effects.Add(Enum.Parse<Effects>(effect));
         }
 
         IsNPC = data.IsNPC;
