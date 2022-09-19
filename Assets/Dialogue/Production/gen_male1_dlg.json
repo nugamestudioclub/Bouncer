@@ -40,14 +40,6 @@
             "connections": [],
             "conditions": [],
             "effects": []
-        },
-		{
-            "label": "id",
-            "text": "",
-			"emotion": "neutral",
-            "connections": [],
-            "conditions": [],
-            "effects": []
         }
     ],
     "pcNodes": [

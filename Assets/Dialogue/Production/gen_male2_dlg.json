@@ -10,10 +10,10 @@
             "effects": []
         },
         {
-            "label": "e2",
+            "label": "e1",
             "text": "Of course. I've been to a bar before. Here.",
 			"emotion": "neutral",
-            "connections": ["id"],
+            "connections": ["r-id"],
             "conditions": [],
             "effects": []
 		},
@@ -39,7 +39,15 @@
             "label": "r1",
             "text": "Nice to meet you. Do you have your ID?",
 			"emotion": "neutral",
-            "connections": ["e2"],
+            "connections": ["e1"],
+            "conditions": [],
+            "effects": []
+		},
+		{
+            "label": "r-id",
+            "text": "",
+			"emotion": "",
+            "connections": [],
             "conditions": [],
             "effects": []
 		}
