@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private Button start;
     [SerializeField]
+    private Button exit;
+    [SerializeField]
     private TMP_InputField usernameInput;
     private string username;
 
@@ -17,6 +19,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         start.onClick.AddListener(StartClicked);
+        exit.onClick.AddListener(Application.Quit);
     }
 
     void StartClicked()

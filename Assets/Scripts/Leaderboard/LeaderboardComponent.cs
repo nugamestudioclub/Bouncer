@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using LootLocker.Requests;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class LeaderboardComponent : MonoBehaviour
@@ -14,14 +16,21 @@ public class LeaderboardComponent : MonoBehaviour
     int leaderboardID = 7117;
 
     public GUILeaderboard gui;
-
+    [SerializeField]
+    private TMP_Text playerNameText;
+    [SerializeField]
+    private TMP_Text scoreText;
  
 
     // Start is called before the first frame update
     void Start()
     {
         this.score = PlayerPrefs.GetInt("score");
+        
         this.playerName = PlayerPrefs.GetString("name");
+        scoreText.text = "SCORE:" + score.ToString();
+        this.playerNameText.text = this.playerName;
+
         LootLockerSDKManager.StartGuestSession((response) =>
         {
             if (!response.success)
@@ -46,6 +55,10 @@ public class LeaderboardComponent : MonoBehaviour
             Submit();
         }
         
+    }
+    public void ReturnHome()
+    {
+        SceneManager.LoadScene(0);
     }
 
     void Submit()

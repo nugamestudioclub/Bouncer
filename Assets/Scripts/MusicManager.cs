@@ -57,7 +57,7 @@ public class MusicManager : MonoBehaviour
         while(lpf.cutoffFrequency < MAX_FREQ)
         {
            lpf.cutoffFrequency = Mathf.Clamp(Mathf.Pow((Time.time - lastTime) + 1, 8) + MIN_FREQ, MIN_FREQ, MAX_FREQ);
-            Debug.Log(lpf.cutoffFrequency);
+            //Debug.Log(lpf.cutoffFrequency);
             yield return new WaitForSeconds(.1f);
         }
 
@@ -69,8 +69,7 @@ public class MusicManager : MonoBehaviour
         while (lpf.cutoffFrequency > MIN_FREQ)
         {          
            lpf.cutoffFrequency = Mathf.Clamp(-(Time.time - lastTime) * MAX_FREQ + MAX_FREQ, MIN_FREQ, MAX_FREQ);
-            Debug.Log(lpf.cutoffFrequency);
-            Debug.Log(Time.time - lastTime);
+           
             yield return new WaitForSeconds(.1f);
         }
     }
