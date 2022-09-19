@@ -13,6 +13,9 @@ public class NPC : MonoBehaviour
     [field: SerializeField]
     public float Patience { get; private set; }
 
+    [field: SerializeField]
+    public GameObject IdCard { get; private set; }
+
     [SerializeField]
     private List<NPCSprite> sprites;
 
