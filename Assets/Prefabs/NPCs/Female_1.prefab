@@ -301,8 +301,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5967502993132702095}
+  - component: {fileID: 7069485447600548746}
+  - component: {fileID: 1527914993500737030}
   m_Layer: 0
-  m_Name: Female
+  m_Name: Female_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -328,6 +330,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7069485447600548746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6741743471979649647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8291a5808c37bba43967feb64bad0f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Dialogue>k__BackingField: {fileID: 3286428130541504896, guid: aabc55aa5c129d148b333fe3d6636c40, type: 3}
+  <Effect>k__BackingField: 3
+  <Patience>k__BackingField: 0
+  sprites:
+  - {fileID: 2956198965907924857}
+  - {fileID: 3193441844585015144}
+--- !u!114 &1527914993500737030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6741743471979649647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d5add0f1935614eac6a62b93f79df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textData: {fileID: 4900000, guid: dca4233748b58c0468c2b7fb8cf6c0a0, type: 3}
 --- !u!1 &7091390404099608545
 GameObject:
   m_ObjectHideFlags: 0
