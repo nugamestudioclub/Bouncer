@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
         Destroy(activeNpc.gameObject);
         if (tracker.IsReputationBad)
             EndGame();
-        else if (IsOutOfTime || selector.IsLast())
+        else if (IsOutOfTime || selector.IsLast )
             EndNight();
         else
             InitializeNextNpc();

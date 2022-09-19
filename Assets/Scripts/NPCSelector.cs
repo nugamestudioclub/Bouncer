@@ -15,8 +15,5 @@ public class NPCSelector : MonoBehaviour
     }
 
     //Dummy class
-    public bool IsLast()
-    {
-        return false;
-    }
+    public bool IsLast => npcs.Count == 0;
 }

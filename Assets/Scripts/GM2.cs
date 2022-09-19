@@ -83,10 +83,13 @@ public class GM2 : MonoBehaviour {
 		convo.NextDialog();
 	}
 	void EndNpc() {
+		playerDialogueView.Clear();
+		npcDialogueView.Clear();
+		Debug.Log($"destroy {night.Active.gameObject.name}...");
 		Destroy(night.Active.gameObject);
 		if( tracker.IsRepBad )
 			EndGame();
-		else if( convo.Timer <= 0 || selectors[curNight].IsLast() )
+		else if( convo.Timer <= 0 || selectors[curNight].IsLast )
 			EndNight();
 
 	}
@@ -98,10 +101,10 @@ public class GM2 : MonoBehaviour {
 	}
 	void EndNight() {
 		curNight++;
-		if( curNight >= maxNumNights ) {
+		if( curNight < selectors.Length )
+			night = new Night(selectors[curNight], NpcSpawn);
+		else
 			EndGame();
-		}
-		this.night = new Night(selectors[curNight], NpcSpawn);
 	}
 
 	void Update() {
@@ -227,7 +230,7 @@ class ConversationTracker {
 					Debug.Log(children[0].Label);
 					handler.SetCurrentNode(children[0]);
 					NextDialog();
-					}
+				}
 			));
 		}
 		else {
