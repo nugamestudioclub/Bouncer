@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using LootLocker.Requests;
+using TMPro;
 
 
 public class LeaderboardComponent : MonoBehaviour
@@ -11,10 +12,16 @@ public class LeaderboardComponent : MonoBehaviour
     [SerializeField]
     private string playerName = "Seb";
     int leaderboardID = 7117;
+
+    public GUILeaderboard gui;
+
+ 
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.score = PlayerPrefs.GetInt("score");
+        this.playerName = PlayerPrefs.GetString("name");
         LootLockerSDKManager.StartGuestSession((response) =>
         {
             if (!response.success)
@@ -96,6 +103,7 @@ public class LeaderboardComponent : MonoBehaviour
                  }
                  string jsonData = JsonUtility.ToJson(data);
                  PlayerPrefs.SetString("scores", jsonData);
+                 gui.Load(data);
                 // print("Loaded Scores:"+jsonData);
              }
              else
@@ -107,9 +115,4 @@ public class LeaderboardComponent : MonoBehaviour
     }
 }
 
-[System.Serializable]
-class SerializedLeaderboardData {
 
-    public string name;
-    public int score;
-}
