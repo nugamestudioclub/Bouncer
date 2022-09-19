@@ -1,0 +1,63 @@
+{
+    "name": "Skeleton",
+    "npcNodes": [
+        {
+            "label": "start",
+            "text": "Riddle me bones.",
+			"emotion": "neutral",
+            "connections": ["e1"],
+            "conditions": [],
+            "effects": []
+        },
+        {
+            "label": "e1",
+            "text": "What do you call a skeleton that came back to life?",
+			"emotion": "unique",
+            "connections": ["r1"],
+            "conditions": [],
+            "effects": []
+		},
+		{
+            "label": "e2",
+            "text": "I thought you might know the answer, that's why I asked!",
+			"emotion": "angry",
+            "connections": ["r-id"],
+            "conditions": [],
+            "effects": []
+        },
+		{
+            "label": "bounce",
+            "text": "Dang.",
+			"emotion": "sad",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+        },
+		{
+            "label": "admit",
+            "text": "...Oh, what? Really? Cool!",
+			"emotion": "happy",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+        }
+    ],
+    "pcNodes": [
+        {
+            "label": "r1",
+            "text": "I don't know what do you call them?",
+			"emotion": "",
+            "connections": ["e2"],
+            "conditions": [],
+            "effects": []
+        },
+		{
+            "label": "r-id",
+            "text": "",
+			"emotion": "",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+		}
+    ]
+}

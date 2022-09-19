@@ -1,0 +1,79 @@
+{
+    "name": "Alien",
+    "npcNodes": [
+        {
+            "label": "start",
+            "text": "blub blib blub",
+			"emotion": "neutral",
+            "connections": ["e1"],
+            "conditions": [],
+            "effects": []
+        },
+        {
+            "label": "e1",
+            "text": "blub blub bleeb blub",
+			"emotion": "unique",
+            "connections": ["r1", "r2"],
+            "conditions": [],
+            "effects": []
+		},
+		{
+            "label": "e2",
+            "text": "*INITIALIZE VAPORIZATION*",
+			"emotion": "angry",
+            "connections": ["r-id"],
+            "conditions": [],
+            "effects": []
+        },
+        {
+            "label": "e3",
+            "text": "bleb blueb",
+			"emotion": "happy",
+            "connections": ["r-id"],
+            "conditions": [],
+            "effects": []
+        },
+		{
+            "label": "bounce",
+            "text": "Dang.",
+			"emotion": "sad",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+        },
+		{
+            "label": "admit",
+            "text": "...Oh, what? Really? Cool!",
+			"emotion": "happy",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+        }
+    ],
+    "pcNodes": [
+        {
+            "label": "r1",
+            "text": "Sorry, can't help you here.",
+			"emotion": "",
+            "connections": ["e2"],
+            "conditions": [],
+            "effects": []
+        },
+        {
+            "label": "r2",
+            "text": "You want to get inside?",
+			"emotion": "",
+            "connections": ["e3"],
+            "conditions": [],
+            "effects": []
+        },
+		{
+            "label": "r-id",
+            "text": "",
+			"emotion": "",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+		}
+    ]
+}

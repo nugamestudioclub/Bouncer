@@ -1,0 +1,55 @@
+{
+    "name": "[name]",
+    "npcNodes": [
+        {
+            "label": "start",
+            "text": "Hey, my name is Dave",
+			"emotion": "happy",
+            "connections": ["r1"],
+            "conditions": [],
+            "effects": []
+        },
+        {
+            "label": "e1",
+            "text": "Of course. I've been to a bar before. Here.",
+			"emotion": "neutral",
+            "connections": ["r-id"],
+            "conditions": [],
+            "effects": []
+		},
+        {
+            "label": "bounce",
+            "text": "Wait, what? There has to be a mistake!",
+			"emotion": "sad",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+		},
+        {
+            "label": "admit",
+            "text": "Great! Thanks!",
+			"emotion": "happy",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+		}
+    ],
+    "pcNodes": [
+		{
+            "label": "r1",
+            "text": "Nice to meet you. Do you have your ID?",
+			"emotion": "neutral",
+            "connections": ["e1"],
+            "conditions": [],
+            "effects": []
+		},
+		{
+            "label": "r-id",
+            "text": "",
+			"emotion": "",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+		}
+    ]
+}

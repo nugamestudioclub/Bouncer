@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d5add0f1935614eac6a62b93f79df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textData: {fileID: 4900000, guid: 1a6f5264630172e49ad411de766eb325, type: 3}
+  textData: {fileID: 4900000, guid: d7fc58e328d888b4397755b148eb82ce, type: 3}
 --- !u!1 &6741743471979649647
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +94,8 @@ MonoBehaviour:
   <Dialogue>k__BackingField: {fileID: 2815445798613650100}
   <Effect>k__BackingField: 4
   <Patience>k__BackingField: 0
-  sprites: []
+  sprites:
+  - {fileID: 1055026198347345887}
 --- !u!1 &7771662063059734159
 GameObject:
   m_ObjectHideFlags: 0

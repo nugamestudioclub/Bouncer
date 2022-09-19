@@ -1,0 +1,63 @@
+{
+    "name": "Chad Bigman",
+    "npcNodes": [
+        {
+            "label": "start",
+            "text": "You are looking real tough.",
+			"emotion": "neutral",
+            "connections": ["e1"],
+            "conditions": [],
+            "effects": []
+        },
+        {
+            "label": "e1",
+            "text": "Like I mean, real tough. WOOT WOOT.",
+			"emotion": "happy",
+            "connections": ["r1"],
+            "conditions": [],
+            "effects": []
+		},
+		{
+            "label": "e2",
+            "text": "Other that my huge noggin? Check out my id, laminated.",
+			"emotion": "unique",
+            "connections": ["r-id"],
+            "conditions": [],
+            "effects": []
+        },
+		{
+            "label": "bounce",
+            "text": "Dang.",
+			"emotion": "sad",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+        },
+		{
+            "label": "admit",
+            "text": "...Oh, what? Really? Cool!",
+			"emotion": "happy",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+        }
+    ],
+    "pcNodes": [
+        {
+            "label": "r1",
+            "text": "Thanks...you got anything you want to show me?",
+			"emotion": "",
+            "connections": ["e2"],
+            "conditions": [],
+            "effects": []
+        },
+		{
+            "label": "r-id",
+            "text": "",
+			"emotion": "",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+		}
+    ]
+}

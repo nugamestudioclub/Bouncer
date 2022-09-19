@@ -69,7 +69,7 @@
             "label": "e8",
             "text": "Drunk humans to mess with.",
 			"emotion": "happy",
-            "connections": [],
+            "connections": ["e9"],
             "conditions": [],
             "effects": []
         },
@@ -109,7 +109,7 @@
             "label": "e13",
             "text": "I mean, I was created in the 5th moon of the -8000s! I'm like, 4 times your senior!",
 			"emotion": "angry",
-            "connections": [""],
+            "connections": ["r8"],
             "conditions": [],
             "effects": []
         },
@@ -139,7 +139,7 @@
         },
 		{
             "label": "e17",
-            "text": "If you're worried I'll make a racket, don't be. The m ost I've done is buy some sad soul a shot of hot sauce and tell them it's a rand of vodka.",
+            "text": "If you're worried I'll make a racket, don't be. The most I've done is buy some sad soul a shot of hot sauce and tell them it's a rand of vodka.",
 			"emotion": "neutral",
             "connections": ["e18"],
             "conditions": [],
@@ -157,7 +157,7 @@
             "label": "e19",
             "text": "The nerve of that individual to sucker-punch metal!.",
 			"emotion": "unique",
-            "connections": [""],
+            "connections": ["r8"],
             "conditions": [],
             "effects": []
         },
@@ -165,7 +165,7 @@
             "label": "bounce",
             "text": "...Guess I'll go count cards at the casino...",
 			"emotion": "sad",
-            "connections": [""],
+            "connections": [],
             "conditions": [],
             "effects": []
         },
@@ -173,7 +173,7 @@
             "label": "admit",
             "text": "Oh! Looks like I might have an enjoyable evening. May we meet again, biological!",
 			"emotion": "happy",
-            "connections": [""],
+            "connections": [],
             "conditions": [],
             "effects": []
         }
@@ -189,7 +189,7 @@
         },
 		{
             "label": "r2",
-            "text": "I’m a bouncer. I can’t understand a thing you’re saying.",
+            "text": "I'm a bouncer. I can't understand a thing you're saying.",
 			"emotion": "",
             "connections": ["e5"],
             "conditions": [],
@@ -198,16 +198,16 @@
 		{
             "label": "r3",
             "text": "I don't care. Show me your ID or get out of line.",
-			"emotion": "e3",
-            "connections": [],
+			"emotion": "",
+            "connections": ["e3"],
             "conditions": [],
             "effects": []
         },
 		{
             "label": "r4",
             "text": "You're a robot. Why do you need to goto a bar..?",
-			"emotion": "e14",
-            "connections": [],
+			"emotion": "",
+            "connections": ["e14"],
             "conditions": [],
             "effects": []
 		},
@@ -223,7 +223,7 @@
             "label": "r6",
             "text": "What is that?",
 			"emotion": "",
-            "connections": [],
+            "connections": ["e8"],
             "conditions": [],
             "effects": []
         },
@@ -246,6 +246,14 @@
 		{
             "label": "r8",
             "text": "Hmm...",
+			"emotion": "",
+            "connections": ["end"],
+            "conditions": [],
+            "effects": []
+        },
+        {
+            "label": "end",
+            "text": "",
 			"emotion": "",
             "connections": [],
             "conditions": [],

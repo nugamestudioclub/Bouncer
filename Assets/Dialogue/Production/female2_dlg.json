@@ -3,46 +3,54 @@
     "npcNodes": [
         {
             "label": "start",
-            "text": "Hey, my name is [name]",
-			"emotion": "happy",
-            "connections": ["r1"],
+            "text": "...",
+			"emotion": "neutral",
+            "connections": ["e1"],
             "conditions": [],
             "effects": []
         },
         {
             "label": "e1",
-            "text": "Of course. I've been to a bar before. Here.",
+            "text": "Do you mind?!",
 			"emotion": "neutral",
-            "connections": ["r-id"],
+            "connections": ["r1"],
             "conditions": [],
             "effects": []
 		},
-        {
+		{
+            "label": "e2",
+            "text": "Here...take it.",
+			"emotion": "sad",
+            "connections": ["r-id"],
+            "conditions": [],
+            "effects": []
+        },
+		{
             "label": "bounce",
-            "text": "Wait, what? There has to be a mistake!",
+            "text": "Dang.",
 			"emotion": "sad",
             "connections": [],
             "conditions": [],
             "effects": []
-		},
-        {
+        },
+		{
             "label": "admit",
-            "text": "Great! Thanks!",
+            "text": "...Oh, what? Really? Cool!",
 			"emotion": "happy",
             "connections": [],
             "conditions": [],
             "effects": []
-		}
+        }
     ],
     "pcNodes": [
-		{
+        {
             "label": "r1",
-            "text": "Nice to meet you. Do you have your ID?",
-			"emotion": "neutral",
-            "connections": ["e1"],
+            "text": "ID, please.",
+			"emotion": "",
+            "connections": ["e2"],
             "conditions": [],
             "effects": []
-		},
+        },
 		{
             "label": "r-id",
             "text": "",
