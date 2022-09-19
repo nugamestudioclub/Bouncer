@@ -7,9 +7,11 @@ public class DialogueNodeData
 {
     public string label;
     public string text;
+    public string emotion;
     public List<string> connections;
     public List<string> conditions;
     public List<string> effects;
+
     public bool IsNPC { get; set; }
 
     public static DialogueNodeData CreateFromJSON(string jsonString)

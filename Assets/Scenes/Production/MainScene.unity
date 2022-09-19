@@ -1846,6 +1846,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 560982008, guid: a8a42f08d6410df418c4d26046444cfb, type: 3}
+      propertyPath: npcs.Array.data[0]
+      value: 
+      objectReference: {fileID: 4920383077707217417, guid: aabc55aa5c129d148b333fe3d6636c40, type: 3}
+    - target: {fileID: 560982008, guid: a8a42f08d6410df418c4d26046444cfb, type: 3}
+      propertyPath: npcs.Array.data[1]
+      value: 
+      objectReference: {fileID: 906734931693991720, guid: c07791168bbb63643aad0b228559e91f, type: 3}
     - target: {fileID: 4297945013221566664, guid: a8a42f08d6410df418c4d26046444cfb, type: 3}
       propertyPath: m_Name
       value: GameManager
