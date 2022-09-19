@@ -4,12 +4,13 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GM2 : MonoBehaviour
 {
     //Private Serialized
     [SerializeField]
-    private NPCSelector selector;
+    private NPCSelector[] selectors;
     [SerializeField]
     private Transform NpcSpawn;
     [SerializeField]
@@ -21,9 +22,11 @@ public class GM2 : MonoBehaviour
     [SerializeField]
     private TMP_Text guiNightCount;
     [SerializeField]
-    private SpriteRenderer clockHandTimer;
+    private Image clockHandTimer;
     [SerializeField]
     private MusicManager musicManager;
+    [SerializeField]
+    private int maxNumNights = 3;
     
 
 
@@ -32,7 +35,8 @@ public class GM2 : MonoBehaviour
     private ScoreTracker tracker;
     private ConversationTracker convo;
     private Night night;
-
+    private Color handColor;
+    private int curNight = 0;
 
 
 
@@ -40,34 +44,91 @@ public class GM2 : MonoBehaviour
     void Start()
     {
         tracker = new ScoreTracker();
-        night = new Night(selector,NpcSpawn);
+        night = new Night(selectors[0],NpcSpawn);
         convo = new ConversationTracker(handler, tracker, night);
+        handColor = clockHandTimer.color;
+    }
 
+    public void Bounce()
+    {
+        EndCharacter();
+        RunBounce(night.Active);
+        //tracker.CalculateEffect(night.Active, DecisionType.BOUNCE);
+
+    }
+    public void Admit()
+    {
+        EndCharacter();
+        RunAdmit(night.Active);
+        //tracker.CalculateEffect(night.Active, DecisionType.ADMIT);
     }
 
     public void RunBounce(NPC character)
     {
         tracker.CalculateEffect(character, DecisionType.BOUNCE);
-
+        night.NextPlayer();
     }
 
     public void RunAdmit(NPC character)
     {
         tracker.CalculateEffect(character, DecisionType.ADMIT);
         StartCoroutine(DoorOpenShut());
+        night.NextPlayer();
+    }
+    void EndCharacter()
+    {
+        Destroy(night.Active.gameObject);
+        if (tracker.IsRepBad)
+            EndGame();
+        else if (convo.Timer<=0 || selectors[curNight].IsLast())
+            EndNight();
+        
+    }
+
+   void EndGame()
+   {
+        tracker.CalcaulteFinalScore();
+        PlayerPrefs.SetInt("score", tracker.Score);
+        SceneManager.LoadScene(2);
+   }
+    void EndNight()
+    {
+        curNight++;
+        if (curNight >= maxNumNights)
+        {
+            EndGame();
+        }
+        this.night = new Night(selectors[curNight], NpcSpawn);
     }
 
     void Update()
     {
         guiMoney.text = "$" + tracker.Money.ToString();
-        guiRep.text = tracker.Reputation.ToString();
-        guiNightCount.text = tracker.NightCount.ToString();
+        guiRep.text = "Rep:"+tracker.Reputation.ToString();
+        guiNightCount.text = "Night:"+tracker.NightCount.ToString();
         
-        float rotAngle = (convo.Timer / 60) * 360;
+        float rotAngle = 90+((convo.Timer / 60) * 360);
         //TODO:Test this.
         clockHandTimer.gameObject.transform.localEulerAngles = new Vector3(clockHandTimer.transform.localEulerAngles.x,
             clockHandTimer.transform.localEulerAngles.y,
             rotAngle);
+        if(convo.Timer < 60 / 4)
+        {
+            if (Mathf.RoundToInt(GameTime) % 2 == 0)
+            {
+                clockHandTimer.color = Color.red;
+            }
+            else
+            {
+                clockHandTimer.color = handColor;
+            }
+
+        }
+        else
+        {
+            clockHandTimer.color = handColor;
+        }
+       
 
         convo.IterateTimer();
         GameTime += Time.deltaTime;
@@ -89,6 +150,7 @@ class Night
     private NPC selected;
     public NPC Active { get { return this.selected; }}
     private NPCSelector selector;
+    private Transform spawn;
     public Night(NPCSelector selector,Transform npcSpawn)
     {
         this.selected = selector.SelectNPC();
@@ -96,14 +158,22 @@ class Night
         this.selected = go.GetComponent<NPC>();
         Debug.Log($"Npc is null: {this.selected == null}");
         this.selector = selector;
+        this.spawn = npcSpawn;
+        this.selector = selector;
     }
 
     public void NextPlayer()
-    {
+    {   
         this.selected = this.selector.SelectNPC();
+        Debug.Log("Selected:" + this.selected.name);
+        GameObject go = MonoBehaviour.Instantiate(this.selected.gameObject, this.spawn);
+        this.selected = go.GetComponent<NPC>();
+        Debug.Log($"Npc is null: {this.selected == null}");
+        
 
     }
 
+    
 
 }
 
@@ -118,6 +188,8 @@ class ScoreTracker
     public int Money { get { return this.money; } }
 
     public int NightCount { get { return this.nightCount; } }
+    public bool IsRepBad { get { return this.Reputation < 0; } }
+
     public ScoreTracker()
     {
         this.score = 0;
@@ -137,16 +209,16 @@ class ScoreTracker
         switch (character.Effect)
         {
             case RepEffect.MajorGood:
-                rep -= 20;
+                rep += 20;
                 break;
             case RepEffect.MinorGood:
-                rep -= 5;
-                break;
-            case RepEffect.MinorProblem:
                 rep += 5;
                 break;
+            case RepEffect.MinorProblem:
+                rep -= 5;
+                break;
             case RepEffect.MajorProblem:
-                rep += 20;
+                rep -= 20;
                 break;
         }
     }
