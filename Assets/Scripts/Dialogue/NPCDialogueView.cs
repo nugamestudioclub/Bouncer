@@ -10,7 +10,8 @@ public class NPCDialogueView : TextMessageLayoutView {
 	}
 
 	protected override TextMessageView MakeView(TextMessage textMessage) {
-		return Instantiate(bubblePrefab,
-			transform.parent).GetComponentInChildren<NPCDialogueEntryView>();
+		textMessage.OnEmotion();
+		return Instantiate(bubblePrefab,transform.parent)
+			.GetComponentInChildren<NPCDialogueEntryView>();
 	}
 }

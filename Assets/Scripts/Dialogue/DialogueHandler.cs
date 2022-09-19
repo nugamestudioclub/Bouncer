@@ -35,6 +35,8 @@ public class DialogueHandler : MonoBehaviour
         currentNode = dialogueTree.GetDialogueNode(label);
     }
 
+    public DialogueNode GetNode(string label) => dialogueTree.GetDialogueNode(label);
+
     public string GetCurrentText()
     {
         return currentNode.Text;

@@ -18,6 +18,8 @@ public class NPC : MonoBehaviour
 
     public void ChangeEmotion(Emotion emotion)
     {
+
+        Debug.Log($"Emotion: {emotion}");
         foreach(NPCSprite sprite in sprites)
         {
             sprite.ChangeEmotion(emotion);
