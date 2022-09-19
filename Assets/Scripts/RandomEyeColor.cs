@@ -6,13 +6,11 @@ public class RandomEyeColor : MonoBehaviour
 {
 
     public SpriteRenderer spriteRenderer;
-    Color rendererColor;
 
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        rendererColor = spriteRenderer.color;
     }
 
     void ChangeColor(Color color)
