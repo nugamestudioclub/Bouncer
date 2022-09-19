@@ -12,7 +12,7 @@ public class NPCSprite : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void ChangeSprite(Emotion emotion)
+    public void ChangeEmotion(Emotion emotion)
     {
         spriteRenderer.sprite = spriteArray[(int)emotion % spriteArray.Length];
     }
