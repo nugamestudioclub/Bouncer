@@ -13,4 +13,6 @@ public class IdCardView : MonoBehaviour {
 
     public void Render() {
     }
+
+	public void FlipCard() {}
 }

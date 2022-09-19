@@ -153,20 +153,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // void ShowCurrentId() {
-    //     ShowId(activeNpc);
-    // }
+    void ShowCurrentId() {
+        ShowId(activeNpc);
+    }
 
-    void ShowId(GameObject id) {
-        // GameObject id = null;// character.getId();
-        // if (id == null) { // character has no id
-        //     return;
-        // }
+    void ShowId(NPC character) {
+        GameObject id = character.IdCard;
+        if (id == null) { // character has no id
+            return;
+        }
+        id.transform.position = new Vector3(5,-2.5f,0); //these values def shouldn't be hardcoded
+        id.transform.Rotate(0,180f,0,Space.Self);
         id.SetActive(true);
     }
 
-    void FlipId() {
-
+    void FlipId(NPC character) {
+         GameObject id = character.IdCard;
+        if (id == null) { // character has no id
+            return;
+        }
+        //TODO perhaps use timers to make smooth flipping animations
+        id.transform.Rotate(0,180f,0,Space.Self);
     }
 
     void getContinueButton(DialogueNode[] node)
