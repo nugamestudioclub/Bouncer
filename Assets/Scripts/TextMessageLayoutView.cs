@@ -8,21 +8,27 @@ public abstract class TextMessageLayoutView : MonoBehaviour {
 
 	protected virtual void DoStart() {	}
 
-	protected abstract GameObject View(TextMessage textMessage);
+	protected abstract TextMessageView MakeView(TextMessage textMessage);
 
 	public void Add(TextMessage textMessage) {
-		var obj = Instantiate(View(textMessage), transform.parent);
-		var view = obj.GetComponent<TextMessageView>();
+
+		var view = MakeView(textMessage);
 
 		view.Text = textMessage.Text;
 
 		StartCoroutine(view.Resize());
 
-		obj.transform.SetParent(transform);
+		view.transform.SetParent(transform);
 	}
 
-	public void Clear() {
-		foreach( Transform child in transform )
+	public void Clear()
+    {
+		foreach (Transform child in transform)
+		{ 
+			Debug.Log(child.gameObject.name);
 			Destroy(child.gameObject);
+		}
+
+        
 	}
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogueHandler : MonoBehaviour
 {
-    NPCDialogueReader dialogueReader;
+    //NPCDialogueReader dialogueReader;
     NPCDialogue dialogueTree;
     DialogueNode currentNode;
 
@@ -12,18 +12,23 @@ public class DialogueHandler : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        dialogueReader = new NPCDialogueReader();
+        //dialogueReader = new NPCDialogueReader();
     }
 
-    void SetCharacterDialogue(string name)
+    public void SetCharacterDialogue(NPCDialogue dialogue)
     {
-        dialogueTree = dialogueReader.GetCharacterDialogue(name);
+        dialogueTree = dialogue;
         SetCurrentNode(dialogueTree.GetDialogueNode("start"));
     }
 
-    void SetCurrentNode(DialogueNode node)
+    public void SetCurrentNode(DialogueNode node)
     {
         currentNode = node;
+    }
+
+    public void SetCurrentNode(string label)
+    {
+        currentNode = dialogueTree.GetDialogueNode(label);
     }
 
     public string GetCurrentText()

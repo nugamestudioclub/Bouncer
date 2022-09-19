@@ -1,18 +1,24 @@
 ﻿using UnityEngine;
 
-public class PhoneMessengerView : TextMessageLayoutView {
-	[SerializeField]
-	GameObject[] bubblePrefabs;
+public class PhoneMessengerView : TextMessageLayoutView
+{
+    [SerializeField]
+    GameObject[] bubblePrefabs;
 
-	protected override void DoStart() {
-		base.DoStart();
-	}
+    protected override void DoStart()
+    {
+        base.DoStart();
+    }
 
-	protected override GameObject View(TextMessage textMessage) {
-		return Instantiate(GetBubblePrefab(textMessage.SpeakerId), transform.parent);
-	}
+    protected override TextMessageView MakeView(TextMessage textMessage)
+    {
+        return Instantiate(GetBubblePrefab(textMessage.SpeakerId), 
+            transform.parent).GetComponent<PhoneTextMessageView>();
 
-	private GameObject GetBubblePrefab(int id) {
-		return bubblePrefabs[id % bubblePrefabs.Length];
-	}
+    }
+
+    private GameObject GetBubblePrefab(int id)
+    {
+        return bubblePrefabs[id % bubblePrefabs.Length];
+    }
 }

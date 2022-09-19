@@ -317,8 +317,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1749484570}
-  - {fileID: 1448279770}
   - {fileID: 1349886038}
+  - {fileID: 1448279770}
   - {fileID: 1602013710}
   - {fileID: 1258192354}
   - {fileID: 706882952}
@@ -351,7 +351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1127032264808712499, guid: b1911b731c19010499109af02820fa7a, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1127032264808712499, guid: b1911b731c19010499109af02820fa7a, type: 3}
       propertyPath: m_AnchorMax.x
@@ -427,17 +427,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1911b731c19010499109af02820fa7a, type: 3}
---- !u!114 &560982006 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3036349986218625117, guid: a8a42f08d6410df418c4d26046444cfb, type: 3}
-  m_PrefabInstance: {fileID: 4654137403185788625}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c82b29f0f6b5b04b8644d8673423bae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &706882952 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1127032264808712499, guid: bf4947bd056c0f34a8754d9ffe7c95b6, type: 3}
@@ -677,7 +666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4704463647752621722, guid: e348b34536be7c344a80a0e944766072, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4704463647752621722, guid: e348b34536be7c344a80a0e944766072, type: 3}
       propertyPath: m_AnchorMax.x
@@ -762,7 +751,7 @@ PrefabInstance:
     - target: {fileID: 4704463647752621723, guid: e348b34536be7c344a80a0e944766072, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 560982006}
+      objectReference: {fileID: 0}
     - target: {fileID: 4704463647752621723, guid: e348b34536be7c344a80a0e944766072, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -901,7 +890,7 @@ PrefabInstance:
     - target: {fileID: 4358598882947231363, guid: 230eb2b6d019bac44a79927f71861acf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 560982006}
+      objectReference: {fileID: 0}
     - target: {fileID: 4358598882947231363, guid: 230eb2b6d019bac44a79927f71861acf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -946,7 +935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1127032264808712499, guid: bf4947bd056c0f34a8754d9ffe7c95b6, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1127032264808712499, guid: bf4947bd056c0f34a8754d9ffe7c95b6, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1191,22 +1180,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1601121022284034677, guid: 40db501eaa0ae4891998e84080b2f840, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd262db0c20644b4b9ebad793f230476, type: 3}
-    - target: {fileID: 1601121022284034677, guid: 40db501eaa0ae4891998e84080b2f840, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601121022284034677, guid: 40db501eaa0ae4891998e84080b2f840, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601121022284034677, guid: 40db501eaa0ae4891998e84080b2f840, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5771601861421028639, guid: 40db501eaa0ae4891998e84080b2f840, type: 3}
       propertyPath: m_Name
       value: Desk
@@ -1424,7 +1397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4882144910958427653, guid: 3476bfa72e6cf41c48ef9a5e7c355ac9, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4882144910958427653, guid: 3476bfa72e6cf41c48ef9a5e7c355ac9, type: 3}
       propertyPath: m_AnchorMax.x

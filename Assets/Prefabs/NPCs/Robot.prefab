@@ -91,10 +91,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8291a5808c37bba43967feb64bad0f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Dialogue>k__BackingField: {fileID: 0}
+  <Dialogue>k__BackingField: {fileID: 3245665971177242002}
   <Effect>k__BackingField: 2
   <Patience>k__BackingField: 0
-  sprite: {fileID: 1055026198347345887}
+  sprites: []
 --- !u!1 &7771662063059734159
 GameObject:
   m_ObjectHideFlags: 0

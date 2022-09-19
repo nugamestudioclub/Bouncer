@@ -6,10 +6,11 @@ public class NPCDialogueView : TextMessageLayoutView {
 	protected override void DoStart() {
 		base.DoStart();
 
-		Add(new TextMessage(1, "howdy"));
+		//Add(new TextMessage(1, "howdy"));
 	}
 
-	protected override GameObject View(TextMessage textMessage) {
-		return bubblePrefab;
+	protected override TextMessageView MakeView(TextMessage textMessage) {
+		return Instantiate(bubblePrefab,
+			transform.parent).GetComponentInChildren<NPCDialogueEntryView>();
 	}
 }

@@ -4,7 +4,7 @@
         {
             "label": "start",
             "text": "Hey, how's it going?",
-            "connections": [ "bounce", "admit", "id" ],
+            "connections": [ "id" ],
             "conditions": [],
             "effects": []
         },
@@ -26,14 +26,14 @@
     "pcNodes": [
         {
             "label": "bounce",
-            "text": "I'm bouncing you",
+            "text": "the the hell out of here",
             "connections": [ "bounce-response" ],
             "conditions": [],
             "effects": []
         },
         {
             "label": "admit",
-            "text": "Go right in",
+            "text": "come inside homie",
             "connections": [],
             "conditions": [],
             "effects": []

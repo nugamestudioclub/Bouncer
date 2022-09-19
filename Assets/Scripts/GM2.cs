@@ -27,7 +27,11 @@ public class GM2 : MonoBehaviour
     private MusicManager musicManager;
     [SerializeField]
     private int maxNumNights = 3;
-    
+    [SerializeField]
+    private NPCDialogueView npcDialogueView;
+    [SerializeField]
+    private PlayerDialogueView playerDialogueView;
+
 
 
     //Private Non-Serialized
@@ -38,27 +42,32 @@ public class GM2 : MonoBehaviour
     private Color handColor;
     private int curNight = 0;
 
+    public static NPC ActiveNpc => instance.night.Active;
+    public static GM2 instance;
 
 
-
-    void Start()
+    void Awake()
     {
+        instance = this;
         tracker = new ScoreTracker();
-        night = new Night(selectors[0],NpcSpawn);
-        convo = new ConversationTracker(handler, tracker, night);
+        night = new Night(selectors[0], NpcSpawn);
+        convo = new ConversationTracker(handler, tracker, night, 
+            npcDialogueView, playerDialogueView);
+        convo.SetDialogue(night.Active.Dialogue);
+        convo.NextDialog();
         handColor = clockHandTimer.color;
     }
 
     public void Bounce()
     {
-        EndCharacter();
+        EndNpc();
         RunBounce(night.Active);
         //tracker.CalculateEffect(night.Active, DecisionType.BOUNCE);
 
     }
     public void Admit()
     {
-        EndCharacter();
+        EndNpc();
         RunAdmit(night.Active);
         //tracker.CalculateEffect(night.Active, DecisionType.ADMIT);
     }
@@ -66,31 +75,35 @@ public class GM2 : MonoBehaviour
     public void RunBounce(NPC character)
     {
         tracker.CalculateEffect(character, DecisionType.BOUNCE);
-        night.NextPlayer();
+        night.NextNpc();
+        convo.SetDialogue(night.Active.Dialogue);
+        convo.NextDialog();
     }
 
     public void RunAdmit(NPC character)
     {
         tracker.CalculateEffect(character, DecisionType.ADMIT);
         StartCoroutine(DoorOpenShut());
-        night.NextPlayer();
+        night.NextNpc();
+        convo.SetDialogue(night.Active.Dialogue);
+        convo.NextDialog();
     }
-    void EndCharacter()
+    void EndNpc()
     {
         Destroy(night.Active.gameObject);
         if (tracker.IsRepBad)
             EndGame();
-        else if (convo.Timer<=0 || selectors[curNight].IsLast())
+        else if (convo.Timer <= 0 || selectors[curNight].IsLast())
             EndNight();
-        
+
     }
 
-   void EndGame()
-   {
+    void EndGame()
+    {
         tracker.CalcaulteFinalScore();
         PlayerPrefs.SetInt("score", tracker.Score);
         SceneManager.LoadScene(2);
-   }
+    }
     void EndNight()
     {
         curNight++;
@@ -104,15 +117,15 @@ public class GM2 : MonoBehaviour
     void Update()
     {
         guiMoney.text = "$" + tracker.Money.ToString();
-        guiRep.text = "Rep:"+tracker.Reputation.ToString();
-        guiNightCount.text = "Night:"+tracker.NightCount.ToString();
-        
-        float rotAngle = 90+((convo.Timer / 60) * 360);
+        guiRep.text = "Rep:" + tracker.Reputation.ToString();
+        guiNightCount.text = "Night:" + tracker.NightCount.ToString();
+
+        float rotAngle = 90 + ((convo.Timer / 60) * 360);
         //TODO:Test this.
         clockHandTimer.gameObject.transform.localEulerAngles = new Vector3(clockHandTimer.transform.localEulerAngles.x,
             clockHandTimer.transform.localEulerAngles.y,
             rotAngle);
-        if(convo.Timer < 60 / 4)
+        if (convo.Timer < 60 / 4)
         {
             if (Mathf.RoundToInt(GameTime) % 2 == 0)
             {
@@ -128,7 +141,7 @@ public class GM2 : MonoBehaviour
         {
             clockHandTimer.color = handColor;
         }
-       
+
 
         convo.IterateTimer();
         GameTime += Time.deltaTime;
@@ -148,10 +161,10 @@ public class GM2 : MonoBehaviour
 class Night
 {
     private NPC selected;
-    public NPC Active { get { return this.selected; }}
+    public NPC Active { get { return this.selected; } }
     private NPCSelector selector;
     private Transform spawn;
-    public Night(NPCSelector selector,Transform npcSpawn)
+    public Night(NPCSelector selector, Transform npcSpawn)
     {
         this.selected = selector.SelectNPC();
         GameObject go = MonoBehaviour.Instantiate(this.selected.gameObject, npcSpawn);
@@ -162,18 +175,144 @@ class Night
         this.selector = selector;
     }
 
-    public void NextPlayer()
-    {   
+    public void NextNpc()
+    {
         this.selected = this.selector.SelectNPC();
         Debug.Log("Selected:" + this.selected.name);
         GameObject go = MonoBehaviour.Instantiate(this.selected.gameObject, this.spawn);
         this.selected = go.GetComponent<NPC>();
         Debug.Log($"Npc is null: {this.selected == null}");
         
-
     }
 
-    
+
+
+}
+
+
+
+class ConversationTracker
+{
+
+    private DialogueHandler handler;
+    private float timer = 60;
+    private bool isTimerRunning;
+    private ScoreTracker tracker;
+    private Night night;
+    private NPCDialogueView npcDialogueView;
+    private PlayerDialogueView playerDialogueView;
+    public float Timer { get { return Mathf.Clamp(this.timer, 0, 60); } }
+    public ConversationTracker(DialogueHandler handler, ScoreTracker tracker, Night night, 
+        NPCDialogueView npcDialogueView, PlayerDialogueView playerDialogueView)
+    {
+        this.handler = handler;
+        timer = 60;
+        isTimerRunning = false;
+        StartTimer();
+        this.tracker = tracker;
+        this.night = night;
+        this.npcDialogueView = npcDialogueView;
+        this.playerDialogueView = playerDialogueView;
+    }
+    public void SetNight(Night night)
+    {
+        this.night = night;
+    }
+
+    public void StartTimer()
+    {
+        this.isTimerRunning = true;
+    }
+    public void StopTimer()
+    {
+        this.isTimerRunning = false;
+    }
+
+    public void SetDialogue(NPCDialogue dialogue)
+    {
+        handler.SetCharacterDialogue(dialogue);
+        Debug.Log(handler.GetCurrentText());
+        npcDialogueView.Add(new TextMessage(1, handler.GetCurrentText(),
+            () => Debug.Log($"{handler.GetCurrentText()} pressed")));
+    }
+
+    public void NextDialog()
+    {
+
+        DialogueNode[] nodes = handler.GetLinkedNodes().ToArray();
+        if (nodes.Length != 0)
+        {
+            npcDialogueView.Clear();
+            playerDialogueView.Clear();
+            npcDialogueView.Add(new TextMessage(1, 
+                handler.GetCurrentText()));
+            
+            foreach (var node in handler.GetLinkedNodes())
+            {
+                playerDialogueView.Add(new TextMessage(0, node.Text,
+                    () => {
+                        handler.SetCurrentNode(node.Connections[0]);
+                        Debug.Log($"Pressed button:  {node.Connections[0]}");
+                        NextDialog();
+                    }));
+            }
+            ResetTimer();
+            /*
+            if (nodes[0].IsNPC)
+            {
+                npcDialogueView.Clear();
+                //DISPLAY NPC "NEXT" BUTTON USING GUI ELEMENTS and DIALOG BOX
+                DialogueNode selected = nodes[0];
+                //TODO DISPLAY IT
+                npcDialogueView.Add(new TextMessage(1, handler.GetCurrentText(), () => Debug.Log($"{selected.Text} pressed")));
+                //playerDialogueView.Add(new TextMessage(0, "continue..."));
+                //Restart Timer for Paitience
+                ResetTimer();
+            }
+            else
+            {
+                
+                playerDialogueView.Clear();
+                //DISPLAY PLAYER DIALOG BUTTONS USING GUI ELEMENTS and DIALOG BOX
+                int selectedNum = 0;
+                DialogueNode selected = nodes[selectedNum];
+                //TODO DISPLAY
+                foreach(var node in handler.GetLinkedNodes())
+                {
+                    playerDialogueView.Add(new TextMessage(0, node.Text, 
+                        () => {
+                            handler.SetCurrentNode(node.Connections[0]);
+                            Debug.Log($"Pressed button:  {node.Connections[0]}");
+                            NextDialog();
+                        }));
+                }
+                
+
+                //Restart Timer for Paitience
+                ResetTimer();
+           
+            }
+            */
+        }
+    }
+    public void IterateTimer()
+    {
+        if (this.isTimerRunning)
+            this.timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
+            StormOut();
+        }
+    }
+    public void ResetTimer()
+    {
+        this.timer = 60;
+    }
+
+    public void StormOut()
+    {
+        tracker.CalculateEffect(night.Active, DecisionType.BOUNCE);
+    }
 
 }
 
@@ -201,10 +340,10 @@ class ScoreTracker
     {
         this.money += Random.Range(rep / 4, rep / 2);
         this.nightCount += 1;
-       
+
     }
 
-    public void CalculateEffect(NPC character,DecisionType type)
+    public void CalculateEffect(NPC character, DecisionType type)
     {
         switch (character.Effect)
         {
@@ -231,82 +370,4 @@ class ScoreTracker
     }
 }
 
-class ConversationTracker {
-
-    private DialogueHandler handler;
-    private float timer = 60;
-    private bool isTimerRunning;
-    private ScoreTracker tracker;
-    private Night night;
-    public float Timer { get { return Mathf.Clamp(this.timer,0,60); } }
-    public ConversationTracker(DialogueHandler handler,ScoreTracker tracker,Night night)
-    {
-        this.handler = handler;
-        timer = 60;
-        isTimerRunning = false;
-        StartTimer();
-        this.tracker = tracker;
-        this.night = night;
-    }
-    public void SetNight(Night night)
-    {
-        this.night = night;    
-    }
-
-    public void StartTimer()
-    {
-        this.isTimerRunning = true;
-    }
-    public void StopTimer()
-    {
-        this.isTimerRunning = false;
-    }
-    public void NextDialog()
-    {
-        DialogueNode[] nodes = handler.GetLinkedNodes().ToArray();
-        if (nodes.Length != 0)
-        {
-            if (nodes[0].IsNPC)
-            {
-                //DISPLAY NPC "NEXT" BUTTON USING GUI ELEMENTS and DIALOG BOX
-                DialogueNode selected = nodes[0];
-                //TODO DISPLAY IT
-
-                //Restart Timer for Paitience
-                ResetTimer();
-            }
-            else
-            {
-                //DISPLAY PLAYER DIALOG BUTTONS USING GUI ELEMENTS and DIALOG BOX
-                int selectedNum = 0;
-                DialogueNode selected = nodes[selectedNum];
-                //TODO DISPLAY
-
-
-                //Restart Timer for Paitience
-                ResetTimer();
-            }
-        }
-    }
-    public void IterateTimer()
-    {
-        if(this.isTimerRunning)
-            this.timer -= Time.deltaTime;
-        if(timer <= 0)
-        {
-            StormOut();
-        }
-    }
-    public void ResetTimer()
-    {
-        this.timer = 60;
-    }
-
-    public void StormOut()
-    {
-        tracker.CalculateEffect(night.Active, DecisionType.BOUNCE);
-    }
-
-}
-
-enum DecisionType {BOUNCE, ADMIT}
+enum DecisionType { BOUNCE, ADMIT }

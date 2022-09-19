@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 560982008}
   - component: {fileID: 1482490605907285056}
   - component: {fileID: 4654137403185788628}
+  - component: {fileID: 4654137403185788633}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -73,11 +74,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66cce642e47d89d4b993c5787f3b5543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selector: {fileID: 560982008}
+  selectors:
+  - {fileID: 560982008}
   NpcSpawn: {fileID: 0}
-  handler: {fileID: 0}
+  handler: {fileID: 4654137403185788633}
   guiMoney: {fileID: 0}
   guiRep: {fileID: 0}
   guiNightCount: {fileID: 0}
   clockHandTimer: {fileID: 0}
   musicManager: {fileID: 0}
+  maxNumNights: 3
+  npcDialogueView: {fileID: 0}
+  playerDialogueView: {fileID: 0}
+--- !u!114 &4654137403185788633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4297945013221566664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44568406cbddee245b66ec78837c52ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
