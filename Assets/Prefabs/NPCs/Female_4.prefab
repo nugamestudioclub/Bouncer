@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8291a5808c37bba43967feb64bad0f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Dialogue>k__BackingField: {fileID: 3286428130541504896, guid: aabc55aa5c129d148b333fe3d6636c40, type: 3}
+  <Dialogue>k__BackingField: {fileID: -7733022441416005828}
   <Effect>k__BackingField: 3
   <Patience>k__BackingField: 0
   sprites:
