@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
 
     private List<bool> conditionStates;
 
+
+    private int messageCounter = 0;
     void Awake()
     {
         instance = this;

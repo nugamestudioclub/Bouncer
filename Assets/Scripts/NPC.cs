@@ -14,5 +14,13 @@ public class NPC : MonoBehaviour
     public float Patience { get; private set; }
 
     [SerializeField]
-    private NPCSprite sprite;
+    private List<NPCSprite> sprites;
+
+    public void ChangeEmotion(Emotion emotion)
+    {
+        foreach(NPCSprite sprite in sprites)
+        {
+            sprite.ChangeEmotion(emotion);
+        }
+    }
 }

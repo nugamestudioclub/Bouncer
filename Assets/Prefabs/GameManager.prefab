@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8682591696303095188}
-  - component: {fileID: 3036349986218625117}
   - component: {fileID: 560982008}
   - component: {fileID: 1482490605907285056}
+  - component: {fileID: 4654137403185788628}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -34,21 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3036349986218625117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4297945013221566664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c82b29f0f6b5b04b8644d8673423bae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selector: {fileID: 560982008}
-  tracker: {fileID: 1482490605907285056}
-  NpcSpawn: {fileID: 0}
 --- !u!114 &560982008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,3 +61,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8da6810f934904baaebfcd1cd93a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4654137403185788628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4297945013221566664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66cce642e47d89d4b993c5787f3b5543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selector: {fileID: 560982008}
+  NpcSpawn: {fileID: 0}
+  handler: {fileID: 0}
+  guiMoney: {fileID: 0}
+  guiRep: {fileID: 0}
+  guiNightCount: {fileID: 0}
+  clockHandTimer: {fileID: 0}
+  musicManager: {fileID: 0}
