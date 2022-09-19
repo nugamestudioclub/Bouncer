@@ -613,7 +613,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcs:
   - {fileID: 4920383077707217417, guid: aabc55aa5c129d148b333fe3d6636c40, type: 3}
-  - {fileID: 1041726230131569006, guid: 8bf268292ca0f7d4ba6fcbc62b385472, type: 3}
+  - {fileID: 4920383077707217417, guid: aabc55aa5c129d148b333fe3d6636c40, type: 3}
+  - {fileID: 4920383077707217417, guid: aabc55aa5c129d148b333fe3d6636c40, type: 3}
 --- !u!4 &686007030
 Transform:
   m_ObjectHideFlags: 0
@@ -744,7 +745,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcs:
   - {fileID: 4920383077707217417, guid: aabc55aa5c129d148b333fe3d6636c40, type: 3}
-  - {fileID: 906734931693991720, guid: c07791168bbb63643aad0b228559e91f, type: 3}
 --- !u!4 &783577652
 Transform:
   m_ObjectHideFlags: 0
@@ -1270,7 +1270,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcs:
   - {fileID: 4920383077707217417, guid: aabc55aa5c129d148b333fe3d6636c40, type: 3}
-  - {fileID: 906734931693991720, guid: c07791168bbb63643aad0b228559e91f, type: 3}
 --- !u!4 &1413159540
 Transform:
   m_ObjectHideFlags: 0

@@ -48,12 +48,11 @@ public class GM2 : MonoBehaviour {
 	void Awake() {
 		instance = this;
 		tracker = new ScoreTracker();
-		night = new Night(selectors[0], NpcSpawn);
 		convo = new ConversationTracker(handler, tracker, night,
 			npcDialogueView, playerDialogueView);
-		convo.SetDialogue(night.Active.Dialogue);
-		convo.NextDialog();
 		handColor = clockHandTimer.color;
+
+		BeginNight();
 	}
 
 	public void Bounce() {
@@ -71,27 +70,30 @@ public class GM2 : MonoBehaviour {
 	public void RunBounce(NPC character) {
 		tracker.CalculateEffect(character, DecisionType.BOUNCE);
 		night.NextNpc();
-		convo.SetDialogue(night.Active.Dialogue);
-		convo.NextDialog();
+		if( night.Active != null ) {
+			convo.SetDialogue(night.Active.Dialogue);
+			convo.NextDialog();
+		}
 	}
 
 	public void RunAdmit(NPC character) {
 		tracker.CalculateEffect(character, DecisionType.ADMIT);
 		StartCoroutine(DoorOpenShut());
 		night.NextNpc();
-		convo.SetDialogue(night.Active.Dialogue);
-		convo.NextDialog();
+		if( night.Active != null ) {
+			convo.SetDialogue(night.Active.Dialogue);
+			convo.NextDialog();
+		}
 	}
 	void EndNpc() {
 		playerDialogueView.Clear();
 		npcDialogueView.Clear();
-		Debug.Log($"destroy {night.Active.gameObject.name}...");
+
 		Destroy(night.Active.gameObject);
 		if( tracker.IsRepBad )
 			EndGame();
 		else if( convo.Timer <= 0 || selectors[curNight].IsLast )
 			EndNight();
-
 	}
 
 	void EndGame() {
@@ -100,11 +102,21 @@ public class GM2 : MonoBehaviour {
 		SceneManager.LoadScene(2);
 	}
 	void EndNight() {
+		EndGame();
+
+		return; //
+
 		curNight++;
 		if( curNight < selectors.Length )
-			night = new Night(selectors[curNight], NpcSpawn);
+			BeginNight();
 		else
 			EndGame();
+	}
+
+	private void BeginNight() {
+		night = new Night(selectors[curNight], NpcSpawn);
+		convo.SetDialogue(night.Active.Dialogue);
+		convo.NextDialog();
 	}
 
 	void Update() {
@@ -161,11 +173,16 @@ class Night {
 	}
 
 	public void NextNpc() {
-		this.selected = this.selector.SelectNPC();
-		Debug.Log("Selected:" + this.selected.name);
-		GameObject go = MonoBehaviour.Instantiate(this.selected.gameObject, this.spawn);
-		this.selected = go.GetComponent<NPC>();
-		Debug.Log($"Npc is null: {this.selected == null}");
+		if( selector.IsLast ) {
+			selected = null;
+		}
+		else {
+			this.selected = this.selector.SelectNPC();
+			Debug.Log("Selected:" + this.selected.name);
+			GameObject go = MonoBehaviour.Instantiate(this.selected.gameObject, this.spawn);
+			this.selected = go.GetComponent<NPC>();
+			Debug.Log($"Npc is null: {this.selected == null}");
+		}
 
 	}
 
