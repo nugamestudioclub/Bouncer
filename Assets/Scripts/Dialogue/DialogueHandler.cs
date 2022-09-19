@@ -26,6 +26,10 @@ public class DialogueHandler : MonoBehaviour
         currentNode = node;
     }
 
+    public DialogueNode GetCurrentNode() {
+        return currentNode;
+	}
+
     public void SetCurrentNode(string label)
     {
         currentNode = dialogueTree.GetDialogueNode(label);
@@ -45,4 +49,9 @@ public class DialogueHandler : MonoBehaviour
             yield return dialogueTree.GetDialogueNode(label);
         }
     }
+
+    public IEnumerable<DialogueNode> GetChildrenOf(DialogueNode node) {
+        foreach( var label in node.Connections )
+            yield return dialogueTree.GetDialogueNode(label);
+	}
 }

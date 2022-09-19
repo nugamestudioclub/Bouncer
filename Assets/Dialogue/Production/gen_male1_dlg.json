@@ -1,0 +1,71 @@
+{
+    "name": "[name]",
+    "npcNodes": [
+        {
+            "label": "start",
+            "text": "Is this like a bar... or something?",
+			"emotion": "unique",
+            "connections": ["e1"],
+            "conditions": [],
+            "effects": []
+        },
+        {
+            "label": "e1",
+            "text": "I've never been. Am I like... allowed?",
+			"emotion": "neutral",
+            "connections": ["r1"],
+            "conditions": [],
+            "effects": []
+		},
+		{
+            "label": "e2",
+            "text": "Uhm...",
+			"emotion": "sad",
+            "connections": ["r-id"],
+            "conditions": [],
+            "effects": []
+        },
+		{
+            "label": "bounce",
+            "text": "Dang.",
+			"emotion": "sad",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+        },
+		{
+            "label": "admit",
+            "text": "...Oh, what? Really? Cool!",
+			"emotion": "happy",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+        },
+		{
+            "label": "id",
+            "text": "",
+			"emotion": "neutral",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+        }
+    ],
+    "pcNodes": [
+        {
+            "label": "r1",
+            "text": "Depends. Are you above age?",
+			"emotion": "",
+            "connections": ["e2"],
+            "conditions": [],
+            "effects": []
+        },
+		{
+            "label": "r-id",
+            "text": "",
+			"emotion": "",
+            "connections": [],
+            "conditions": [],
+            "effects": []
+		}
+    ]
+}
